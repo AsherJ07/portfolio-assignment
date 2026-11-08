@@ -66,6 +66,7 @@ Remote evidence: [pull request #1](https://github.com/AsherJ07/portfolio-assignm
 - The Fashion case study intentionally has no repository/demo link or quantified business outcome because neither was supplied.
 - `npm run test:e2e` passed 14/14 checks across desktop Chrome and `375x812` mobile Chrome, including axe, overflow, image decoding, and the exact Creator repository URL.
 - A desktop visual pass confirmed that the Creator screenshot remains readable in the split card and the Fashion workflow uses a full-width media row without clipping or awkward cropping.
+- GitHub Actions passed for both the branch push and pull-request event on [pull request #2](https://github.com/AsherJ07/portfolio-assignment/pull/2).
 
 ## Responsive visual checks
 

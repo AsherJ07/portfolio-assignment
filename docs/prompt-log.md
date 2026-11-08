@@ -187,3 +187,5 @@ This log records the student's real requests or faithful concise summaries, the 
 
 **Student annotation needed:** In the PR, confirm whether the Fashion Trend Radar role/contribution and output are accurate, and provide any genuine constraints, measured result, repository, or demo that would make the case study stronger.
 
+**Release checkpoint:** Commits `8654bc3` (`feat: add authentic project screenshots and fashion case study`) and `0e0c735` (`docs: record authentic project evidence revision`) were pushed to `codex/add-project-evidence`. Opened GitHub pull request #2, “Add authentic project evidence and Fashion Trend Radar case study,” against `main`. Both push and pull-request GitHub Actions quality runs passed.
+
