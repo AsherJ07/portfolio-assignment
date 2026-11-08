@@ -20,7 +20,7 @@ Run after the first portfolio UI and responsive fixes:
 | --- | --- |
 | `npm run lint` | Passed with zero warnings under `--max-warnings=0` |
 | `npm run typecheck` | Passed with strict TypeScript and no emitted files |
-| `npm test` | Passed after contact implementation: 5 test files, 10 tests |
+| `npm test` | Passed after authentic project evidence integration: 5 test files, 11 tests |
 | `npm run build` | Passed; `/`, custom not-found handling, `/api/contact`, `/api/health`, and `/icon.svg` generated successfully |
 | `npm audit --omit=dev --audit-level=high` | Passed after network-enabled retry: zero production vulnerabilities |
 | `git diff --check` | Passed; no whitespace errors |
@@ -28,7 +28,7 @@ Run after the first portfolio UI and responsive fixes:
 Tests currently cover:
 
 - health endpoint status and JSON response;
-- a minimum of three case studies with non-empty problem, contribution, result, technologies, and evidence;
+- a minimum of four case studies with non-empty problem, contribution, result/learning, technologies, and evidence;
 - human-readable skill context without proficiency percentages;
 - mobile navigation open/close state, Escape behavior, and focus restoration;
 - valid and invalid contact payloads and accessible field-error mapping;
@@ -56,6 +56,16 @@ The initial non-escalated Playwright attempt could not bind `0.0.0.0:3010` (`EPE
 An audit retry during this checkpoint could not reach `registry.npmjs.org` because DNS/network access was restricted. The earlier network-enabled production audit result of zero vulnerabilities remains the latest completed audit evidence; no new passing result is inferred.
 
 Remote evidence: [pull request #1](https://github.com/AsherJ07/portfolio-assignment/pull/1). GitHub reported the repository as public during verification; changing visibility requires student approval and remains a compliance blocker before submission.
+
+### Authentic project evidence checkpoint - 2026-11-08
+
+- Creator Intelligence now uses the supplied dashboard capture, resized from 2938×1490 to 1800×913 while preserving its aspect ratio and readable interface content.
+- AI Fashion Trend Radar uses the supplied 1646×380 workflow image without cropping its wide process structure.
+- Both images render through Next.js Image with declared dimensions, responsive `sizes`, lazy loading, descriptive alt text, and explicit captions.
+- The Creator repository URL was independently resolved through GitHub and is rendered as a descriptive external link.
+- The Fashion case study intentionally has no repository/demo link or quantified business outcome because neither was supplied.
+- `npm run test:e2e` passed 14/14 checks across desktop Chrome and `375x812` mobile Chrome, including axe, overflow, image decoding, and the exact Creator repository URL.
+- A desktop visual pass confirmed that the Creator screenshot remains readable in the split card and the Fashion workflow uses a full-width media row without clipping or awkward cropping.
 
 ## Responsive visual checks
 
@@ -107,13 +117,13 @@ Docker CLI and Docker Desktop were not installed, so image build/run evidence re
 
 ## Known limitations and pending verification
 
-- Contact form is implemented, but real inbox delivery remains blocked on an approved provider, sender, destination, and secret configuration.
+- The student reports that deployed Resend delivery now succeeds after environment configuration; direct non-sensitive inbox/provider-log evidence has not yet been captured by the agent.
 - Email and LinkedIn details shown locally require student confirmation before public deployment.
-- Project repository/demo links and real screenshots have not been supplied; current visuals are intentionally labeled illustrations.
+- The Creator project now has a verified repository and real screenshot. Fashion has a real workflow image but still needs any available repository/demo, confirmed constraints, and measured outcome; the other two projects retain intentionally labeled illustrations.
 - Automated axe checks now pass at desktop and mobile sizes; extended manual zoom and additional-viewport checks remain pending after the PR checkpoint.
 - External-link validation, spelling/grammar audit, console-log audit, and image/link crawler remain pending.
 - Lighthouse scores have not yet been collected.
 - Local multi-stage container build, non-root process, image health, and containerized route checks remain pending because no container runtime is installed.
-- Private GitHub trigger, Cloud Run rollout, public HTTPS routes, and production form delivery remain pending.
+- Private-repository status, GitHub-trigger evidence, Cloud Run revision/settings, public HTTPS routes, and direct production-delivery evidence remain pending in this document.
 
 These pending checks prevent any claim that the assignment or Excellent-level rubric is complete.

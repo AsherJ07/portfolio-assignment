@@ -165,3 +165,25 @@ This log records the student's real requests or faithful concise summaries, the 
 
 **Release checkpoint:** Pushed `codex/pixel-inspired-portfolio` to the supplied GitHub repository and opened pull request #1, “Add accessible browser QA and professional color refinement,” against `main`. Both GitHub Actions quality runs completed successfully. Remote inspection showed the repository is currently public; this conflicts with the project rule requiring a private repository unless the student explicitly chooses otherwise, so visibility remains a student decision rather than an unapproved change.
 
+## 2026-11-08 18:03 EST - Authentic project evidence and fourth case study
+
+**Build stage:** Post-deployment project-evidence refinement
+
+**Student prompt (faithful summary):** Confirmed that contact-form delivery now works. Supplied a real Creator Intelligence platform screenshot and its GitHub repository URL, requested that the screenshot replace the placeholder visual and that the repository link be added. Supplied a second screenshot of the AI Fashion Trend Radar workflow and requested that it become an additional project with that image. Required a separate branch and review pull request.
+
+**Action/output:** Verified that PR #1 was merged, fetched the updated `main`, and created `codex/add-project-evidence`. Inspected both screenshots and their dimensions, verified the supplied Creator repository, and audited existing Fashion Trend Radar source material. Saved a dedicated plan before application changes. Resized the oversized Creator capture to 1800×913, retained the already compact 1646×380 Fashion workflow, and integrated both through Next.js Image with intrinsic dimensions, responsive sizes, useful alt text, and project-specific captions. Added the Creator repository CTA and a fourth Fashion mini case study with an explicit non-commercial result statement. Updated unit and browser coverage. Lint, strict TypeScript, 11 unit/component/API tests, production build, and 14 desktop/mobile Playwright checks passed. A visual browser pass confirmed both screenshots remain contained and legible in the professional card system.
+
+**Sources used:** The student's screenshots establish authentic product/workflow visuals. The supplied GitHub URL establishes the Creator project link. The student's earlier portfolio supplies the Fashion Trend Radar purpose and data-source description. The rubric and `AGENTS.md` require strong visuals, working links where available, truthful mini case studies, optimized assets, meaningful alt text, and no invented outcomes.
+
+**Relevant files:** `docs/plans/06-authentic-project-evidence-plan.md`, `docs/prompt-log.md`, `src/data/portfolio.ts`, `src/app/page.tsx`, `public/images/projects/creator-intelligence-platform.png`, `public/images/projects/ai-fashion-trend-radar.png`, and the project test suites; earlier portfolio at `/Users/asher/Documents/ChatGPT/Resume/index.html`
+
+**What worked:** The contact delivery configuration now works according to the student's direct report. The Creator project now has both a real product screenshot and a genuine repository URL, directly strengthening two previously documented rubric gaps. The Fashion screenshot provides concrete evidence of a multi-stage agent workflow and supports a stronger fourth project than an illustrative placeholder.
+
+**What did not work:** The current Creator card still uses a labeled placeholder illustration and has no working repository CTA. The portfolio contains only three featured case studies. The available Fashion evidence does not establish a quantified result, public repository, demo URL, or detailed constraints.
+
+**Why:** Real project assets and the Creator URL were not available during the original build. The Fashion project was previously mentioned only briefly in the student's older portfolio and original planning shortlist, so promoting it earlier would have required unsupported assumptions.
+
+**How the next prompt/action changed:** The typed project model will support real screenshot metadata and genuine optional links. Creator Intelligence will use the supplied screenshot and repository. Fashion Trend Radar will be added as a fourth mini case study with an honest output/learning statement, the supplied workflow image, and no fabricated link or metric. The new branch will receive a separate tested PR.
+
+**Student annotation needed:** In the PR, confirm whether the Fashion Trend Radar role/contribution and output are accurate, and provide any genuine constraints, measured result, repository, or demo that would make the case study stronger.
+
