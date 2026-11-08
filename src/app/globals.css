@@ -334,8 +334,53 @@ svg { display: block; }
 .project-summary { max-width: 36rem; margin: 1.35rem 0 0; color: var(--ink-soft); }
 .tag-list { display: flex; flex-wrap: wrap; margin: 1.75rem 0 0; padding: 0; gap: 0.5rem; list-style: none; }
 .tag-list li { padding: 0.35rem 0.55rem; border: 1px solid var(--ink); background: var(--paper); color: var(--ink-soft); font-size: 0.7rem; font-weight: 800; }
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  margin-top: 1.5rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #b7c4df;
+  border-radius: 0.65rem;
+  background: #edf2ff;
+  color: var(--blue-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+.project-link:hover {
+  border-color: var(--blue);
+  background: #e0e9ff;
+  transform: translateY(-1px);
+}
+.project-link svg {
+  width: 1rem;
+  margin-left: 0.55rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
 .project-card__visual { display: flex; flex-direction: column; justify-content: center; min-width: 0; margin: 0; padding: clamp(1.25rem, 3vw, 2.5rem); border-left: var(--line); background: var(--paper-deep); }
 .project-card__visual figcaption { margin-top: 0.65rem; color: var(--ink-soft); font-size: 0.68rem; text-align: right; }
+.project-screenshot {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #c7cecb;
+  border-radius: 1rem;
+  background: var(--surface);
+  box-shadow: 0 10px 30px rgb(17 24 39 / 10%);
+}
+.project-card--wide-media {
+  grid-template-columns: 1fr;
+}
+.project-card--wide-media .project-card__visual {
+  border-top: var(--line);
+  border-left: 0;
+}
 .project-visual { width: 100%; height: auto; border: var(--line-thin); background: var(--ink); box-shadow: 5px 5px 0 var(--ink); }
 .project-visual .visual-bg { fill: #132034; }
 .project-visual .visual-rule { fill: none; stroke: #b4c1cf; stroke-opacity: 0.32; }
