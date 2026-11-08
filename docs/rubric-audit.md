@@ -9,7 +9,7 @@
 | Rubric area | Status | Current evidence | Remaining gate |
 | --- | --- | --- | --- |
 | Required sections and projects | Partial | Tailored hero, navigation, three mini case studies with context/contribution/result, original visuals, evidence metrics, technologies, skills, background, and contact section | Student approval; genuine project links where available; optional real screenshots |
-| Dynamic app and Cloud Run | Partial | Next.js application, dynamic health route, standalone build output | Multi-stage container, private GitHub repository/trigger, Cloud Run deployment, public HTTPS verification, deliberate settings documentation |
+| Dynamic app and Cloud Run | Partial | Next.js application; dynamic health/contact routes; verified self-contained standalone server; health/CSS/404 checks; multi-stage non-root Dockerfile; deliberate settings guide | Install/approve container runtime and verify image; confirm private GitHub/GCP targets; branch trigger; Cloud Run deployment; public HTTPS verification |
 | Prompt log and iterative refinement | Partial | Whole-build log started at intake; correction prompt explicitly records what worked, failed, why, sources, and next change | Student-authored evaluation of the visual/content checkpoint; continue through deployment |
 | Responsive design | Passed locally | Browser evidence at `375x812`, `768x1024`, `1440x900`, and both sides of every implemented breakpoint; no horizontal overflow | Repeat after form and later layout changes; cross-browser pass before final handoff |
 | Professional polish | Partial | Distinctive restrained identity, documented tokens, original SVGs, hierarchy, metadata, favicon, 404, reduced-motion CSS | Full proofread, broken-link/image check, automated accessibility, keyboard/zoom/contrast pass, console check, Lighthouse |
@@ -21,7 +21,8 @@
 
 - Present: `AGENTS.md`, original plan, later revision plan, prompt log, application source, tests, manifest/lockfile, `.gitignore`, `.env.example`.
 - Started: testing evidence and rubric audit.
-- Pending: rules-evolution log, deployment guide, README, Dockerfile, `.dockerignore`, CI/CD configuration, later QA/deployment plan, and clean submission archive.
+- Present but still requiring later observed evidence: rules-evolution log, deployment guide, README, Dockerfile, `.dockerignore`, quality CI workflow, and deployment/QA revision plan.
+- Pending: branch-triggered deploy workflow, verified local image, final accessibility/Lighthouse evidence, real delivery, Cloud Run evidence, and clean submission archive.
 
 ## Control decision
 

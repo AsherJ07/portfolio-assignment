@@ -99,3 +99,23 @@ This log records the student's real requests or faithful concise summaries, the 
 
 **Student annotation needed:** Approve Resend or choose another delivery provider, confirm the private destination inbox, and confirm the public sender identity/domain. Do not paste an API key into chat or commit it; credentials will be configured through approved secret/environment tooling later.
 
+## 2026-11-08 16:19 EST - Standalone runtime and deployment preparation
+
+**Build stage:** Local runtime hardening, container preparation, and third rubric-control checkpoint
+
+**Student prompt (carried forward):** Continue with proper coding practices, meaningful commits, and every in-scope Excellent-level requirement while pausing only when missing information blocks top quality.
+
+**Action/output:** Added a pinned three-stage non-root Dockerfile, strict `.dockerignore`, standalone static-asset staging, current GitHub Actions quality workflow, README, deployment guide, and honest rules-evolution ledger. Verified current action majors against official GitHub release pages before choosing version 7. Ran lint, typecheck, 10 tests, production build, and a production-only dependency audit. Started the self-contained standalone server, verified health JSON, CSS, responsive styling, and 404 behavior. Saved a third plan for the revised deployment/QA path. Commit: `149e370` (`build: prepare standalone container deployment`).
+
+**Sources used:** `AGENTS.md` supplied container, health, non-root, Cloud Run, least-privilege, documentation, and verification requirements. Next.js runtime behavior observed during earlier QA drove static-asset staging. Official GitHub action release pages established the maintained checkout/setup-node majors. The assignment rubric drove deliberate deployment work beyond defaults.
+
+**What worked:** The standalone server now starts with `npm start`, honors an explicit `PORT`, binds on `0.0.0.0`, serves CSS, returns `{"status":"ok"}` from `/api/health`, renders the responsive application, and returns 404 for a missing path. The production dependency audit found zero vulnerabilities. The runtime image definition copies only self-contained output and runs as a dedicated unprivileged user.
+
+**What did not work:** Docker commands could not run because neither the Docker CLI nor Docker Desktop is installed. Therefore the image build, non-root process inspection, container health check, and containerized route/form checks remain unverified. The branch-triggered deploy workflow cannot be finalized without confirmed GitHub/GCP targets, branch, region, billing context, and identity choices.
+
+**Why:** Container execution needs software not currently available and installing it changes the student's machine. Cloud deployment choices affect external resources, public exposure, identity, and possible cost, which `AGENTS.md` explicitly reserves for student confirmation.
+
+**How the next prompt/action changed:** The build records container verification as blocked rather than passed, adds a post-install command matrix, and preserves cloud setup as proposed documentation only. The next local phase focuses on accessibility, link integrity, proofreading, and Lighthouse-style quality checks. Before actual container/cloud work, the student must approve a container runtime and identify the private repository/deployment branch, GCP project, region, and billing/public-access choices.
+
+**Student annotation needed:** Confirm whether you want Docker Desktop installed for the required local container test. Also confirm the intended private GitHub repository/deployment branch and GCP project/region, but do not send credentials or secret values.
+

@@ -22,6 +22,7 @@ Run after the first portfolio UI and responsive fixes:
 | `npm run typecheck` | Passed with strict TypeScript and no emitted files |
 | `npm test` | Passed after contact implementation: 5 test files, 10 tests |
 | `npm run build` | Passed; `/`, custom not-found handling, `/api/contact`, `/api/health`, and `/icon.svg` generated successfully |
+| `npm audit --omit=dev --audit-level=high` | Passed after network-enabled retry: zero production vulnerabilities |
 | `git diff --check` | Passed; no whitespace errors |
 
 Tests currently cover:
@@ -69,6 +70,20 @@ Additional observed measurements:
 - Submitted synthetic local contact data with delivery intentionally unconfigured; the visible live-region message correctly stated that delivery was not configured and directed the visitor to email.
 - Browser console inspection after contact interactions returned zero warnings or errors.
 
+## Standalone production runtime
+
+The build now stages `.next/static` and optional public assets inside `.next/standalone` before runtime verification.
+
+| Check | Observed result |
+| --- | --- |
+| `PORT=3005 npm start` | Standalone server ready immediately on `0.0.0.0:3005` |
+| `GET /api/health` | `200` with `{"status":"ok"}` |
+| `GET /` | HTML returned with a reachable generated CSS asset |
+| Browser at `375x812` | CSS loaded, hero computed to `48.75px`, no horizontal overflow |
+| Missing route | HTTP `404` with the custom not-found experience |
+
+Docker CLI and Docker Desktop were not installed, so image build/run evidence remains pending rather than inferred from the Dockerfile.
+
 ## Known limitations and pending verification
 
 - Contact form is implemented, but real inbox delivery remains blocked on an approved provider, sender, destination, and secret configuration.
@@ -77,7 +92,7 @@ Additional observed measurements:
 - Automated accessibility tooling and the full manual keyboard/zoom/contrast pass remain pending.
 - External-link validation, spelling/grammar audit, console-log audit, and image/link crawler remain pending.
 - Lighthouse scores have not yet been collected.
-- Local multi-stage container build and health checks remain pending.
+- Local multi-stage container build, non-root process, image health, and containerized route checks remain pending because no container runtime is installed.
 - Private GitHub trigger, Cloud Run rollout, public HTTPS routes, and production form delivery remain pending.
 
 These pending checks prevent any claim that the assignment or Excellent-level rubric is complete.
