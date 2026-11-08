@@ -10,7 +10,7 @@ This document records observed results as the portfolio is built. It distinguish
 - npm: `10.9.2`
 - Framework: Next.js `16.4.5`, React `19.3.1`, TypeScript `6.0.3`
 - Browser used for visual QA: Google Chrome
-- Current verified UI commit: `a4f68ef`
+- Current verified application commits: `a4f68ef` (portfolio UI), `19c39e1` (contact pipeline)
 
 ## Automated quality checks
 
@@ -20,8 +20,8 @@ Run after the first portfolio UI and responsive fixes:
 | --- | --- |
 | `npm run lint` | Passed with zero warnings under `--max-warnings=0` |
 | `npm run typecheck` | Passed with strict TypeScript and no emitted files |
-| `npm test` | Passed: 3 test files, 4 tests |
-| `npm run build` | Passed; `/`, custom not-found handling, `/api/health`, and `/icon.svg` generated successfully |
+| `npm test` | Passed after contact implementation: 5 test files, 10 tests |
+| `npm run build` | Passed; `/`, custom not-found handling, `/api/contact`, `/api/health`, and `/icon.svg` generated successfully |
 | `git diff --check` | Passed; no whitespace errors |
 
 Tests currently cover:
@@ -29,7 +29,11 @@ Tests currently cover:
 - health endpoint status and JSON response;
 - a minimum of three case studies with non-empty problem, contribution, result, technologies, and evidence;
 - human-readable skill context without proficiency percentages;
-- mobile navigation open/close state, Escape behavior, and focus restoration.
+- mobile navigation open/close state, Escape behavior, and focus restoration;
+- valid and invalid contact payloads and accessible field-error mapping;
+- honest unconfigured-delivery response;
+- delivery-provider failure response without false success;
+- success only after the provider accepts the message.
 
 ## Responsive visual checks
 
@@ -60,10 +64,14 @@ Additional observed measurements:
 - Tablet hero and evidence panel inspected at `768x1024`.
 - Mobile hero, open navigation, and selected-work entry inspected at `375x812`.
 - Mobile menu exposed the correct expanded state and four reachable navigation links.
+- Desktop contact layout inspected at `1440x900`; labels, helper text, direct contact links, and form remained readable with no internal overflow.
+- Mobile contact layout inspected at `375x812`; form reflowed below the contact links with no horizontal overflow.
+- Submitted synthetic local contact data with delivery intentionally unconfigured; the visible live-region message correctly stated that delivery was not configured and directed the visitor to email.
+- Browser console inspection after contact interactions returned zero warnings or errors.
 
 ## Known limitations and pending verification
 
-- Contact form has not yet been implemented or connected to a delivery provider.
+- Contact form is implemented, but real inbox delivery remains blocked on an approved provider, sender, destination, and secret configuration.
 - Email and LinkedIn details shown locally require student confirmation before public deployment.
 - Project repository/demo links and real screenshots have not been supplied; current visuals are intentionally labeled illustrations.
 - Automated accessibility tooling and the full manual keyboard/zoom/contrast pass remain pending.

@@ -79,3 +79,23 @@ This log records the student's real requests or faithful concise summaries, the 
 
 **Student annotation needed:** Review the local visual direction and content. Identify which parts feel strongest, which feel off-brand or too dense/sparse, whether the product-management and analytics balance matches your target roles, and why you want the next design/content change. Also confirm whether the Gmail address and LinkedIn URL shown locally are the contact details you want published.
 
+## 2026-11-08 16:15 EST - Validated contact pipeline
+
+**Build stage:** Contact implementation and second rubric-control checkpoint
+
+**Student prompt (carried forward):** Continue the build, preserve explicit prompt evaluation, and satisfy every in-scope Excellent-level requirement.
+
+**Action/output:** Implemented and committed a contact form with visible labels, native client constraints, shared server validation, field/form errors, pending/success/failure states, honeypot, minimum-completion-time check, best-effort per-instance rate limiting, and a Resend delivery adapter driven only by server environment variables. Added tests for valid/invalid schemas, unconfigured delivery, provider rejection, and provider acceptance. Visually checked desktop and mobile layouts, submitted synthetic data locally, verified honest unconfigured-delivery feedback, and confirmed zero browser console warnings/errors. Commit: `19c39e1` (`feat: add validated contact delivery pipeline`).
+
+**Sources used:** The Excellent contact descriptor required a working validated form with confirmation or error feedback in addition to professional links. `AGENTS.md` added client/server validation, spam mitigation, pending/success/error states, an agreed delivery mechanism, and end-to-end verification without exposing credentials.
+
+**What worked:** Lint, strict type checking, production build, and 10 tests across 5 files passed. The API returns success only after the provider accepts the message; provider and network failures return explicit errors. The live local form displayed the expected unconfigured-delivery error rather than silently discarding the message. Desktop and `375x812` layouts had no horizontal overflow, and the console contained no warnings or errors.
+
+**What did not work:** End-to-end delivery to a real inbox is not yet possible because no provider account, verified sender, API key, or approved private destination has been supplied. Therefore the Excellent contact gate is still only partial even though the application behavior is implemented and locally tested. The in-memory rate limiter is intentionally best-effort per Cloud Run instance, not a globally durable abuse-control service.
+
+**Why:** External delivery requires a student-owned account/credential decision and may involve a third-party service, domain verification, or usage limits. A global rate-limit datastore would add cost and operational complexity that is disproportionate for a small portfolio unless later evidence shows it is necessary.
+
+**How the next prompt/action changed:** The form now fails honestly while unconfigured and directs visitors to the visible email fallback. Final deployment will inject secrets through Cloud Run rather than source control and must include a real success/failure inbox test. Local work can continue with containerization, CI documentation, accessibility, and quality checks while the delivery decision remains open.
+
+**Student annotation needed:** Approve Resend or choose another delivery provider, confirm the private destination inbox, and confirm the public sender identity/domain. Do not paste an API key into chat or commit it; credentials will be configured through approved secret/environment tooling later.
+

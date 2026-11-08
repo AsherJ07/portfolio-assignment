@@ -14,7 +14,7 @@
 | Responsive design | Passed locally | Browser evidence at `375x812`, `768x1024`, `1440x900`, and both sides of every implemented breakpoint; no horizontal overflow | Repeat after form and later layout changes; cross-browser pass before final handoff |
 | Professional polish | Partial | Distinctive restrained identity, documented tokens, original SVGs, hierarchy, metadata, favicon, 404, reduced-motion CSS | Full proofread, broken-link/image check, automated accessibility, keyboard/zoom/contrast pass, console check, Lighthouse |
 | Rules file and plans | Passed for current stage | Project-specific `AGENTS.md`, preserved original plan, genuine second revision plan | Continue new plans only for real later changes; update rules only when evidence justifies it |
-| Contact information | Partial | Easy-to-find email and LinkedIn links present locally | Student approval of details; validated client/server form; spam mitigation; real delivery; success and failure testing |
+| Contact information | Partial | Easy-to-find email and LinkedIn links; client/server validation; pending/success/error UI; honeypot, timing, and rate controls; provider acceptance/failure tests; honest local unconfigured state | Student approval of details/provider; secret configuration; real inbox delivery and failure test |
 | Reflection | Out of scope | No reflection created or edited | Student-owned assignment deliverable |
 
 ## Repository-deliverable status
@@ -25,4 +25,4 @@
 
 ## Control decision
 
-Do not describe the portfolio or assignment as complete. The next highest-risk Excellent gate is the working contact form because it requires both implementation and an approved, testable delivery destination. Container and cloud deployment follow after local product quality is stable.
+Do not describe the portfolio or assignment as complete. The contact implementation is locally complete but real delivery is blocked on a student-owned provider decision. The next executable gates are containerization, accessibility, link/console/performance checks, and CI/deployment documentation; cloud writes still require confirmed GitHub and GCP targets.
