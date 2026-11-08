@@ -119,3 +119,49 @@ This log records the student's real requests or faithful concise summaries, the 
 
 **Student annotation needed:** Confirm whether you want Docker Desktop installed for the required local container test. Also confirm the intended private GitHub repository/deployment branch and GCP project/region, but do not send credentials or secret values.
 
+## 2026-11-08 16:36 EST - Student visual correction and release reprioritization
+
+**Build stage:** First student visual review, design pivot, and review-release planning
+
+**Student prompt (faithful summary):** Continue after the usage limit reset. The earlier pixelated portfolio at `/Users/asher/Documents/ChatGPT/Resume` is a design the student really likes, while the current portfolio feels bland. Use the earlier site as inspiration without weakening any rubric requirement. Because another interruption is possible, prioritize the tests necessary for a working portfolio, then push the work to the supplied GitHub repository on a separate branch and open a professionally written pull request for review.
+
+**Action/output:** Created the dedicated `codex/pixel-inspired-portfolio` branch while preserving the in-progress accessibility work. Inspected the earlier portfolio's HTML, CSS, JavaScript, and visual system. Identified its reusable design language—pixel display type, monospaced supporting type, warm paper and dark ink, red/blue/lime accents, hard borders, offset shadows, game-window framing, quest/stat/inventory metaphors, and restrained step-style interaction. Reviewed UI/UX accessibility and web-performance rules, rejected an off-topic generated dashboard override, and saved this new design/release plan before changing application UI.
+
+**Sources used:** The student's direct evaluation established the design problem and preferred reference. The local earlier portfolio supplied concrete visual evidence. The rubric and `AGENTS.md` keep truthful content, accessibility, responsive behavior, testing, private GitHub, and Cloud Run gates binding. The UI/UX guidance informed touch targets, typography limits, contrast, reduced motion, performance, form feedback, and responsive checks.
+
+**Relevant files:** `docs/plans/04-pixel-identity-and-release-plan.md`, `docs/prompt-log.md`; reference inspected outside the repository at `/Users/asher/Documents/ChatGPT/Resume`
+
+**What worked:** The student explicitly likes the earlier portfolio's pixelated UI, giving the project a concrete and authentic visual reference instead of an inferred style preference. The existing framework app already contains the stronger rubric-oriented architecture, truthful case studies, accessible navigation, validated form, responsive structure, and automated test foundation that should be preserved.
+
+**What did not work:** The current restrained editorial design feels bland to the student. The earlier AI interpretation of “sleek, modern, and less cluttered” removed too much character and did not test the visual direction against the student's existing work before committing to it. The process also had not yet prioritized a reviewable remote branch despite the risk of another usage interruption.
+
+**Why:** “Sleek” was treated primarily as minimalism and whitespace rather than as polish within the student's established pixel-art identity. The earlier local portfolio was not part of the initial source set, so its stronger stylistic evidence was unavailable during the first design decision.
+
+**How the next prompt/action changed:** The next iteration will keep the current app's semantic and rubric-complete foundation but replace its visual skin and framing with a professional pixel/brutalist system grounded in the supplied reference. A boot/loading gate, unsupported game levels, excessive animation, and unverified old claims will not be carried forward. Work is now sequenced around a tested, separately branched pull request first; GCP deployment follows once the required project, region, billing/public-access, identity, and secret decisions are confirmed.
+
+**Student annotation needed:** Review the pull request and identify which pixel-inspired elements feel most authentic, which still feel too subdued or too game-like, and why. Also confirm the public contact details and the required GCP deployment choices listed in the revision plan.
+
+## 2026-11-08 16:47 EST - Professional-polish correction and PR-first checkpoint
+
+**Build stage:** Second student visual review before release
+
+**Student prompt (faithful summary):** After rereading the Professional Polish rubric, the student is concerned that a strongly pixelated design may lose marks for not appearing employer-ready. Keep the site professional, add enough color to avoid blandness, confirm all rubric/instruction requirements are present, run the basic tests needed for the assignment, and create the pull request before additional tests.
+
+**Action/output:** Paused the pixel-heavy direction before publishing it. Saved a new plan that makes employer-ready hierarchy the controlling design constraint, then removed literal game copy, pixel typography, arcade framing, and the decorative game scene. Retained a restrained warm-paper, blue, coral, and lime palette; original project visuals; a colored evidence panel; soft elevation; accessible interaction states; and conventional professional typography. Ran lint, strict type checking, 10 unit/component/API tests, a production build, and 12 Playwright browser/axe checks. The first browser pass found a 3.39:1 coral label; after darkening the text accent, all 12 desktop/mobile checks passed.
+
+**Sources used:** The student's direct rubric interpretation and visual correction; the rubric's Professional Polish descriptor; `AGENTS.md` requirements for honest plans, testing evidence, accessibility, and auditable increments.
+
+**Relevant files:** `docs/plans/05-professional-polish-and-pr-plan.md`, `docs/prompt-log.md`, `docs/testing.md`, `src/app/globals.css`, `playwright.config.ts`, `tests/e2e/portfolio.spec.ts`. Commits: `833146d` (`test: add browser accessibility release gate`) and `2cd65a1` (`feat: refine portfolio with professional color identity`). Review: GitHub pull request #1.
+
+**What worked:** The student still wants more visual character than the first restrained design and explicitly supports adding color. The existing app's information architecture, case-study depth, original visuals, accessibility work, and production structure remain useful and do not need to be rebuilt.
+
+**What did not work:** The first design was too bland; the immediate correction swung too far toward literal pixel/game styling. That could make the theme compete with the professional evidence and introduce grading ambiguity under Employer-ready Professional Polish.
+
+**Why:** The first interpretation underweighted identity, while the second over-weighted the old portfolio's surface language. The rubric requires both distinction and professional judgment, so neither extreme is appropriate.
+
+**How the next prompt/action changed:** The release candidate will use conventional professional typography, spacing, surfaces, and content labels with selective coral, blue, lime, and warm-paper accents. Literal game terminology, pixel typography, hard arcade framing, and decorative game scenes will be removed. The build sequence is now explicitly: essential automated checks, meaningful commits, safe remote inspection, branch push, professional PR, then extended tests and cloud work.
+
+**Student annotation needed:** In the pull request review, state whether the revised balance feels distinctive enough without becoming themed, and identify any section that still looks too generic or too playful.
+
+**Release checkpoint:** Pushed `codex/pixel-inspired-portfolio` to the supplied GitHub repository and opened pull request #1, “Add accessible browser QA and professional color refinement,” against `main`. Both GitHub Actions quality runs completed successfully. Remote inspection showed the repository is currently public; this conflicts with the project rule requiring a private repository unless the student explicitly chooses otherwise, so visibility remains a student decision rather than an unapproved change.
+

@@ -39,3 +39,6 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Browser and accessibility checks
+        run: npm run test:e2e:run
