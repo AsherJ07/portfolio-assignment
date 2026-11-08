@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Test and analysis output
+coverage/
+playwright-report/
+test-results/
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+
+# OS and editor files
+.DS_Store
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
+*.tsbuildinfo
+
+# Local submission archives
+*.zip
