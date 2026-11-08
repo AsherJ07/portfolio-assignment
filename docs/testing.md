@@ -76,6 +76,15 @@ Remote evidence: [pull request #1](https://github.com/AsherJ07/portfolio-assignm
 - `npm run test:e2e` passed 14/14 checks across desktop Chrome and `375x812` mobile Chrome. The suite now asserts that the removed caption is not visible and that the Fashion screenshot sits to the right of its heading at desktop width.
 - A production-browser visual pass at desktop width confirmed the smaller workflow is contained beside the text, remains uncropped, and introduces no awkward empty media row.
 
+### Background-band correction checkpoint - 2026-11-08
+
+- Refactored the Background section into a full-width semantic band with an inner shared content shell, removing the container-edge border and surface cutoffs visible in the deployed screenshot.
+- Preserved the two-column Experience/Education grid, mobile reflow, heading order, and content without changing personal claims.
+- `npm run lint`, `npm run typecheck`, `npm test -- --run`, and `npm run build` passed; the unit/component/API result remains 5 files and 11 tests.
+- The initial Playwright attempt hit the previously documented sandbox `EPERM` restriction on port 3010. The permitted retry passed 16/16 checks across desktop and `375x812` mobile Chrome.
+- New browser coverage verifies that `.background-section` reaches both viewport edges while its direct `.section-shell` child remains bounded inside them.
+- A desktop production-browser pass confirmed the Fashion workflow is beside its narrative on the review branch and the Background surface now continues cleanly across the viewport without clipped border endpoints.
+
 ## Responsive visual checks
 
 The production build was inspected with explicit browser viewport overrides. The first pass revealed and fixed a metric-label collision, hero-type breakpoint jumps, and an undersized footer target.

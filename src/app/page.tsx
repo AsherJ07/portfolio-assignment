@@ -219,47 +219,49 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="background-section section-shell" aria-labelledby="background-title">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">Background</p>
-              <h2 id="background-title">A technical foundation with a business point of view.</h2>
+        <section className="background-section" aria-labelledby="background-title">
+          <div className="section-shell">
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">Background</p>
+                <h2 id="background-title">A technical foundation with a business point of view.</h2>
+              </div>
             </div>
-          </div>
 
-          <div className="background-grid">
-            <div>
-              <h3>Experience</h3>
-              <ol className="timeline">
-                {experience.map((item) => (
-                  <li key={`${item.organization}-${item.role}`}>
-                    <div>
-                      <strong>{item.organization}</strong>
-                      <span>{item.role}</span>
-                    </div>
-                    <span>{item.period}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-            <div>
-              <h3>Education</h3>
-              <ol className="timeline">
-                {education.map((item) => (
-                  <li key={item.school}>
-                    <div>
-                      <strong>{item.school}</strong>
-                      <span>{item.degree}</span>
-                    </div>
-                    <span>{item.detail}</span>
-                  </li>
-                ))}
-              </ol>
-              <p className="coursework-note">
-                Graduate work includes data mining, visual analytics, cloud computing,
-                advanced databases, digital product design, big data and MLOps, reinforcement
-                learning and LLMs, and AI for business decisions.
-              </p>
+            <div className="background-grid">
+              <div>
+                <h3>Experience</h3>
+                <ol className="timeline">
+                  {experience.map((item) => (
+                    <li key={`${item.organization}-${item.role}`}>
+                      <div>
+                        <strong>{item.organization}</strong>
+                        <span>{item.role}</span>
+                      </div>
+                      <span>{item.period}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+              <div>
+                <h3>Education</h3>
+                <ol className="timeline">
+                  {education.map((item) => (
+                    <li key={item.school}>
+                      <div>
+                        <strong>{item.school}</strong>
+                        <span>{item.degree}</span>
+                      </div>
+                      <span>{item.detail}</span>
+                    </li>
+                  ))}
+                </ol>
+                <p className="coursework-note">
+                  Graduate work includes data mining, visual analytics, cloud computing,
+                  advanced databases, digital product design, big data and MLOps,
+                  reinforcement learning and LLMs, and AI for business decisions.
+                </p>
+              </div>
             </div>
           </div>
         </section>
