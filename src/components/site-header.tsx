@@ -31,7 +31,7 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <a className="brand" href="#top" aria-label="Asher Javaid, back to top">
+        <a className="brand" href="#top" aria-label="AJ — Asher Javaid, back to top">
           AJ<span className="brand-mark" aria-hidden="true" />
         </a>
 
