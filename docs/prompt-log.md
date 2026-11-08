@@ -59,3 +59,23 @@ This log records the student's real requests or faithful concise summaries, the 
 
 **Student annotation needed:** Confirm whether this revised structure captures the level of evaluation you intended. After the first visual checkpoint, add your own assessment of the actual design and content so the next refinement is genuinely student-driven.
 
+## 2026-11-08 16:10 EST - First portfolio experience and responsive QA
+
+**Build stage:** Initial content-rich UI implementation and first rubric-control checkpoint
+
+**Student prompt (carried forward):** Continue the build after correcting the prompt log, apply the explicit evaluation structure to future entries, and ensure all other Excellent-level rubric instructions are followed.
+
+**Action/output:** Built and committed the first complete portfolio narrative: accessible global navigation and mobile menu, tailored hero, three resume-grounded case studies, original illustrative SVG visuals, descriptive skill indicators, experience and education, professional contact links, metadata, favicon, and a custom 404. Added content and mobile-menu tests. Ran lint, strict TypeScript, tests, and a production build. Inspected the site in Chrome at the three required viewports and widths immediately around all CSS breakpoints, then fixed issues found during visual QA. Commit: `a4f68ef` (`feat: build responsive portfolio experience`).
+
+**Sources used:** The latest resume informed the product/analytics positioning, case-study facts, metrics, experience, education, and contact links. The earlier analytics resume cross-checked project and experience descriptions. The transcript informed the graduate-coursework summary. The rubric drove the mini-case-study structure, descriptive proficiency indicators, responsive checks, and professional-polish gate. The student's sleek/modern/low-clutter preference drove the spacious editorial layout and restrained visual system.
+
+**What worked:** The server-component-first implementation produced a small, fast-building page with only the mobile menu as client JavaScript. Three case studies visibly separate context, contribution, and result; every visual is original and honestly labeled as illustrative. Automated checks passed: 3 test files, 4 tests, lint, strict type checking, and production build. Browser checks found no horizontal overflow at the required viewports or breakpoint-adjacent widths. The mobile navigation exposed 52-53px link targets and correctly closed with Escape while restoring focus in its component test.
+
+**What did not work:** The first desktop rendering crowded the `300K+` evidence value against its label. The hero font size changed abruptly at the `768/769` and later `992/993` transitions. The footer's `Back to top` link was initially below the 44px touch-target goal. Directly launching the raw standalone server omitted CSS because `.next/static` had not been staged beside the standalone output. The Excellent contact-form requirement, real project links/screenshots, container, Lighthouse/accessibility audit, private GitHub trigger, Cloud Run deployment, and public verification are still incomplete.
+
+**Why:** The evidence-board columns were too narrow for the widest metric; separate mobile/intermediate font formulas created discontinuities at media-query boundaries; the footer link had no explicit minimum height; and Next.js standalone output requires runtime copying of both the standalone server and static assets. Remaining rubric items belong to later implementation, user-decision, infrastructure, and verification phases.
+
+**How the next prompt/action changed:** CSS was revised to guarantee a measured 16px gap between the widest metric and label, use a continuous fluid hero scale, and give the footer control a 44px height. Breakpoint checks were expanded to widths on both sides of every media query rather than only the three rubric sizes. The Docker runtime plan now explicitly includes `.next/static` alongside standalone output. The next implementation phase prioritizes the validated contact form and honest unconfigured-delivery behavior before containerization.
+
+**Student annotation needed:** Review the local visual direction and content. Identify which parts feel strongest, which feel off-brand or too dense/sparse, whether the product-management and analytics balance matches your target roles, and why you want the next design/content change. Also confirm whether the Gmail address and LinkedIn URL shown locally are the contact details you want published.
+
