@@ -187,3 +187,29 @@ This log records the student's real requests or faithful concise summaries, the 
 
 **Student annotation needed:** In the PR, confirm whether the Fashion Trend Radar role/contribution and output are accurate, and provide any genuine constraints, measured result, repository, or demo that would make the case study stronger.
 
+**Release checkpoint:** Commits `8654bc3` (`feat: add authentic project screenshots and fashion case study`) and `0e0c735` (`docs: record authentic project evidence revision`) were merged through GitHub pull request #2, “Add authentic project evidence and Fashion Trend Radar case study.” Both push and pull-request GitHub Actions quality runs passed.
+
+## 2026-11-08 18:20 EST - Project-card consistency and deployment-rubric clarification
+
+**Build stage:** Student review after project-evidence merge
+
+**Student prompt (faithful summary):** Shrink the AI Fashion Trend Radar screenshot and place it beside the project text in the same layout as the other cards rather than below it. Remove the visible “supplied by Asher Javaid” wording without replacing it. Explain how the project can satisfy the rubric criterion for deployment work beyond defaults, such as a hand-tuned multi-stage Dockerfile, custom domain, or deliberate Cloud Run settings documented in the repository.
+
+**Action/output:** Confirmed PR #2 was merged, fetched the updated `main`, created `codex/refine-project-layout`, inspected the current project media model and deployment artifacts, and saved this focused revision plan before application changes. Returned Fashion Trend Radar to the standard split card, removed public provenance captions without replacement, retained descriptive alt text, deleted the unused wide-media rendering/CSS path, and added browser assertions for both requested outcomes. Lint, strict type checking, 11 unit/component/API tests, production build, and all 14 desktop/mobile Playwright checks passed. A production-browser visual pass confirmed the workflow is contained beside the narrative at desktop width without clipping.
+
+**Sources used:** The student's screenshot and direct visual evaluation define the layout/caption correction. The committed Dockerfile, `.dockerignore`, deployment guide, assignment rubric, and `AGENTS.md` define the deployment-evidence path.
+
+**Relevant files:** `docs/plans/07-project-layout-and-deployment-evidence-plan.md`, `docs/prompt-log.md`, `src/data/portfolio.ts`, `src/app/page.tsx`, `src/app/globals.css`, `Dockerfile`, `.dockerignore`, and `docs/deployment.md`
+
+**What worked:** The real Fashion workflow is strong authentic evidence, and the existing responsive project-card system already has a professional split layout that can contain it. The repository also already includes a hand-tuned multi-stage Dockerfile and a deliberate Cloud Run settings table with cost/latency rationale—two valid examples from the rubric.
+
+**What did not work:** The Fashion-specific full-width media override made the image dominate the card and broke visual consistency. The visible “supplied by Asher Javaid” captions read like internal provenance notes rather than employer-facing portfolio copy. Deployment documentation still labels Cloud Run values as proposed and the live-verification record as pending, so the repository does not yet prove those settings were actually used.
+
+**Why:** The wide workflow was initially prioritized for maximum legibility, but the resulting scale and placement outweighed card consistency. Caption provenance was useful during implementation but unnecessary in the final public presentation. Cloud choices were documented before the student deployed, so actual values could not be recorded honestly at that stage.
+
+**How the next prompt/action changed:** Fashion now uses the standard split card, screenshot captions are absent while alt text remains, and unused wide-layout code is gone. The deployment guide now explicitly maps the multi-stage non-root container and deliberate Cloud Run settings to the beyond-default rubric criterion and explains that a custom domain is optional. The next deployment evidence step is to record the actual GCP values, public URL, revision/image, production checks, and deployment-branch trigger without exposing secrets.
+
+**Student annotation needed:** Confirm that the smaller split-card Fashion image remains readable enough. Provide the actual Cloud Run settings and public service URL so the proposed deployment guide can become observed rubric evidence.
+
+**Release checkpoint:** Commits `b7f87e1` (`fix: align fashion media with project cards`) and `e9d2456` (`docs: clarify deployment rubric evidence`) were pushed on `codex/refine-project-layout`. GitHub pull request #3, “Refine Fashion project layout and deployment evidence,” was opened against `main` for student review.
+

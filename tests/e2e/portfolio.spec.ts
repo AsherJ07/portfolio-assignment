@@ -117,4 +117,19 @@ test("real project screenshots load and the supplied repository link is exposed"
     "href",
     "https://github.com/AsherJ07/purdue-youtube-ip-new",
   );
+
+  await expect(page.getByText(/supplied by Asher Javaid/i)).toHaveCount(0);
+
+  if ((page.viewportSize()?.width ?? 0) > 1088) {
+    const fashionHeading = page.getByRole("heading", {
+      level: 3,
+      name: "Turning fragmented fashion signals into a structured trend brief",
+    });
+    const positions = await Promise.all([
+      fashionHeading.evaluate((element) => element.getBoundingClientRect().left),
+      fashionScreenshot.evaluate((element) => element.getBoundingClientRect().left),
+    ]);
+
+    expect(positions[1]).toBeGreaterThan(positions[0]);
+  }
 });
