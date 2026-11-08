@@ -1,3 +1,21 @@
+export type IllustrationType = "diagnostics" | "creator" | "research";
+
+type ProjectMedia =
+  | {
+      kind: "illustration";
+      type: IllustrationType;
+      caption: string;
+    }
+  | {
+      kind: "screenshot";
+      src: string;
+      width: number;
+      height: number;
+      alt: string;
+      caption: string;
+      presentation?: "standard" | "wide";
+    };
+
 export type Project = {
   slug: string;
   eyebrow: string;
@@ -8,7 +26,8 @@ export type Project = {
   result: string;
   technologies: readonly string[];
   evidence: readonly { value: string; label: string }[];
-  visual: "diagnostics" | "creator" | "research";
+  visual: ProjectMedia;
+  link?: { href: string; label: string };
 };
 
 export type SkillGroup = {
@@ -17,7 +36,7 @@ export type SkillGroup = {
   items: readonly { name: string; context: string }[];
 };
 
-export const featuredProjects = [
+export const featuredProjects: readonly Project[] = [
   {
     slug: "warp-diagnostic-analysis",
     eyebrow: "Product management · Applied AI",
@@ -36,7 +55,11 @@ export const featuredProjects = [
       { value: "76%", label: "root-cause accuracy" },
       { value: "~270", label: "cases served monthly" },
     ],
-    visual: "diagnostics",
+    visual: {
+      kind: "illustration",
+      type: "diagnostics",
+      caption: "Original illustrative visual—not a product screenshot.",
+    },
   },
   {
     slug: "creator-intelligence-platform",
@@ -56,7 +79,18 @@ export const featuredProjects = [
       { value: "500+", label: "channels represented" },
       { value: "Biweekly", label: "partner insight reviews" },
     ],
-    visual: "creator",
+    visual: {
+      kind: "screenshot",
+      src: "/images/projects/creator-intelligence-platform.png",
+      width: 1800,
+      height: 913,
+      alt: "YouTube Creator Insights benchmarking interface with category, channel, and publication filters plus summary metrics for videos, channels, views, median views, and public interaction.",
+      caption: "Creator Intelligence benchmarking interface supplied by Asher Javaid.",
+    },
+    link: {
+      href: "https://github.com/AsherJ07/purdue-youtube-ip-new",
+      label: "View project repository",
+    },
   },
   {
     slug: "multilingual-fact-checking",
@@ -76,9 +110,41 @@ export const featuredProjects = [
       { value: "4", label: "prompting strategies" },
       { value: "4", label: "model families compared" },
     ],
-    visual: "research",
+    visual: {
+      kind: "illustration",
+      type: "research",
+      caption: "Original illustrative visual—not a product screenshot.",
+    },
   },
-] as const satisfies readonly Project[];
+  {
+    slug: "ai-fashion-trend-radar",
+    eyebrow: "AI agents · Trend intelligence",
+    title: "Turning fragmented fashion signals into a structured trend brief",
+    summary:
+      "An agent workflow that organizes signals from TikTok, Google Trends, and Pinterest into a repeatable view of momentum, saturation, and emerging fashion themes.",
+    problem:
+      "Fashion signals are distributed across platforms and move at different speeds, making it difficult to compare whether a term is accelerating, saturated, or worth investigating further.",
+    contribution:
+      "Designed a visual workflow that parses category, region, timeframe, and brand inputs; generates a taxonomy; iterates through search terms; evaluates platform signals; and aggregates the findings into a report.",
+    result:
+      "Produced an end-to-end report pipeline that makes the signal-gathering logic inspectable and repeatable. Current evidence demonstrates the working workflow, not a validated commercial outcome.",
+    technologies: ["AI agents", "TikTok signals", "Google Trends", "GPT-4o"],
+    evidence: [
+      { value: "3", label: "trend signal sources modeled" },
+      { value: "Multi-stage", label: "agent workflow" },
+      { value: "Report", label: "structured final output" },
+    ],
+    visual: {
+      kind: "screenshot",
+      src: "/images/projects/ai-fashion-trend-radar.png",
+      width: 1646,
+      height: 380,
+      alt: "AI Fashion Trend Radar workflow connecting input parsing, taxonomy generation, term extraction, TikTok and Google Trends analysis, trend comparison, aggregation, and report generation.",
+      caption: "AI Fashion Trend Radar agent workflow supplied by Asher Javaid.",
+      presentation: "wide",
+    },
+  },
+];
 
 export const skillGroups = [
   {

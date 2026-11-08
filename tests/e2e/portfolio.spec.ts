@@ -90,3 +90,31 @@ test("links are non-empty and local hash links resolve to real targets", async (
     }
   }
 });
+
+test("real project screenshots load and the supplied repository link is exposed", async ({
+  page,
+}) => {
+  await page.goto("/#work");
+
+  const creatorScreenshot = page.getByAltText(
+    /YouTube Creator Insights benchmarking interface/,
+  );
+  const fashionScreenshot = page.getByAltText(/AI Fashion Trend Radar workflow/);
+
+  await creatorScreenshot.scrollIntoViewIfNeeded();
+  await expect(creatorScreenshot).toBeVisible();
+  await fashionScreenshot.scrollIntoViewIfNeeded();
+  await expect(fashionScreenshot).toBeVisible();
+
+  await expect
+    .poll(() => creatorScreenshot.evaluate((image: HTMLImageElement) => image.naturalWidth))
+    .toBeGreaterThan(0);
+  await expect
+    .poll(() => fashionScreenshot.evaluate((image: HTMLImageElement) => image.naturalWidth))
+    .toBeGreaterThan(0);
+
+  await expect(page.getByRole("link", { name: "View project repository" })).toHaveAttribute(
+    "href",
+    "https://github.com/AsherJ07/purdue-youtube-ip-new",
+  );
+});

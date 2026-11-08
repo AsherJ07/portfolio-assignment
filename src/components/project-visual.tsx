@@ -1,12 +1,12 @@
-import type { Project } from "@/data/portfolio";
+import type { IllustrationType } from "@/data/portfolio";
 
-const visualTitles: Record<Project["visual"], string> = {
+const visualTitles: Record<IllustrationType, string> = {
   diagnostics: "Abstract diagnostic interface showing evidence converging on a root cause",
   creator: "Abstract creator landscape showing clustered content signals and an emerging opportunity",
   research: "Abstract multilingual research network comparing models, prompts, and confidence",
 };
 
-export function ProjectVisual({ type }: { type: Project["visual"] }) {
+export function ProjectVisual({ type }: { type: IllustrationType }) {
   return (
     <svg
       className={`project-visual project-visual--${type}`}

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowUpRightIcon, LinkedInIcon, MailIcon } from "@/components/icons";
 import { ContactForm } from "@/components/contact-form";
 import { ProjectVisual } from "@/components/project-visual";
@@ -83,7 +84,7 @@ export default function HomePage() {
           <div className="section-shell section-heading">
             <div>
               <p className="eyebrow">Selected work</p>
-              <h2 id="work-title">Three problems. Three kinds of evidence.</h2>
+              <h2 id="work-title">Four problems. Four kinds of evidence.</h2>
             </div>
             <p>
               A closer look at how I frame decisions, contribute across disciplines, and
@@ -93,7 +94,15 @@ export default function HomePage() {
 
           <div className="project-list section-shell">
             {featuredProjects.map((project, index) => (
-              <article className="project-card" key={project.slug}>
+              <article
+                className={`project-card${
+                  project.visual.kind === "screenshot" &&
+                  project.visual.presentation === "wide"
+                    ? " project-card--wide-media"
+                    : ""
+                }`}
+                key={project.slug}
+              >
                 <div className="project-card__intro">
                   <p className="project-number">Case study 0{index + 1}</p>
                   <p className="eyebrow">{project.eyebrow}</p>
@@ -104,11 +113,38 @@ export default function HomePage() {
                       <li key={technology}>{technology}</li>
                     ))}
                   </ul>
+                  {project.link ? (
+                    <a
+                      className="project-link"
+                      href={project.link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {project.link.label}
+                      <ArrowUpRightIcon />
+                    </a>
+                  ) : null}
                 </div>
 
                 <figure className="project-card__visual">
-                  <ProjectVisual type={project.visual} />
-                  <figcaption>Original illustrative visual—not a product screenshot.</figcaption>
+                  {project.visual.kind === "screenshot" ? (
+                    <Image
+                      className="project-screenshot"
+                      src={project.visual.src}
+                      width={project.visual.width}
+                      height={project.visual.height}
+                      alt={project.visual.alt}
+                      sizes={
+                        project.visual.presentation === "wide"
+                          ? "(max-width: 1280px) calc(100vw - 3rem), 1200px"
+                          : "(max-width: 1088px) calc(100vw - 3rem), 680px"
+                      }
+                      quality={85}
+                    />
+                  ) : (
+                    <ProjectVisual type={project.visual.type} />
+                  )}
+                  <figcaption>{project.visual.caption}</figcaption>
                 </figure>
 
                 <div className="case-study-grid">
