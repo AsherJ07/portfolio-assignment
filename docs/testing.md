@@ -47,12 +47,15 @@ The professionally refined color direction was checked before remote publication
 | `npm test -- --run` | Passed: 5 files, 10 tests |
 | `npm run build` | Passed; standalone assets staged and all expected routes generated |
 | `npm run test:e2e` | Passed after one contrast correction: 12/12 Playwright tests across desktop Chrome and `375x812` mobile Chrome |
+| GitHub Actions `Quality checks` | Both push and pull-request runs passed on `codex/pixel-inspired-portfolio`; PR #1 is open and mergeable |
 
 The first browser run found the small coral `Case study` label at 3.39:1 on white. It was darkened from `#e95e4f` to `#a9322a`, then both desktop and mobile axe checks passed with no serious or critical findings. The suite also observed no horizontal overflow, reachable direct anchors, honest unconfigured contact feedback, a useful 404 recovery action, reduced-motion behavior, and valid local hash/link targets.
 
 The initial non-escalated Playwright attempt could not bind `0.0.0.0:3010` (`EPERM`) under the filesystem sandbox. The same committed suite ran successfully with local-server permission; this was an environment constraint, not an application failure.
 
 An audit retry during this checkpoint could not reach `registry.npmjs.org` because DNS/network access was restricted. The earlier network-enabled production audit result of zero vulnerabilities remains the latest completed audit evidence; no new passing result is inferred.
+
+Remote evidence: [pull request #1](https://github.com/AsherJ07/portfolio-assignment/pull/1). GitHub reported the repository as public during verification; changing visibility requires student approval and remains a compliance blocker before submission.
 
 ## Responsive visual checks
 
