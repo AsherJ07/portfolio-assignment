@@ -1,6 +1,6 @@
 # Prompt Log
 
-This log records the student's real requests or faithful concise summaries, the work produced from them, and explicit places where the student's own evaluation is still needed. Assignment text is recorded as a source requirement, never as a student prompt. Secrets and unnecessary personal data are excluded.
+This log records the student's real requests or faithful concise summaries, the work produced from them, and the resulting prompt-strategy evolution. Every entry explicitly separates what worked, what did not, why, and how the next prompt or action changed. When the student has not supplied an evaluation, the log says so and requests an annotation instead of inventing one. Assignment text is recorded as a source requirement, never as a student prompt. Secrets and unnecessary personal data are excluded.
 
 ## 2026-11-08 15:18 EST - Repository rules confirmation
 
@@ -9,7 +9,15 @@ This log records the student's real requests or faithful concise summaries, the 
 **Action/output:** Verified the 221-line project rules file in the repository and summarized its mission, Next.js preference, documentation requirements, truthfulness constraints, rubric gates, testing expectations, container/deployment requirements, and definition of done. No files were changed.  
 **Relevant file:** `AGENTS.md`
 
-**Student annotation needed:** What, if anything, did this overview reveal that you wanted clarified or changed before implementation?
+**What worked:** The requested repository check was completed directly and established that a detailed project-specific rules file existed before planning. The student did not provide an evaluation of the overview itself, so no positive student judgment is inferred.
+
+**What did not work:** At this stage, the prompt log did not yet exist, so the interaction was only reconstructed when the log was created. The student has not identified any problem with the overview itself.
+
+**Why:** The repository began with only `AGENTS.md`; prompt-history infrastructure was created during the next build stage.
+
+**How the next prompt changed:** The student moved from confirming governance to supplying the assignment sources, personal source documents, quality target, coding expectations, and visual preference.
+
+**Student annotation needed:** Confirm whether the overview was sufficiently clear and whether anything should have been clarified before implementation.
 
 ## 2026-11-08 15:36 EST - Assignment kickoff and source-document review
 
@@ -19,5 +27,35 @@ This log records the student's real requests or faithful concise summaries, the 
 **Sources used:** Assignment instructions Markdown; four-page assignment rubric PDF; current product-management/business-analytics resume; earlier data-analytics resume; unofficial graduate transcript. These source documents remain outside the repository.  
 **Relevant files:** `docs/plans/01-original-plan.md`, `docs/prompt-log.md`, `design-system/asher-javaid-portfolio/MASTER.md`, `design-system/asher-javaid-portfolio/pages/home.md`
 
-**Student annotation needed:** After reviewing the first implemented design checkpoint, explain what feels aligned or misaligned with your target roles and sleek/modern preference, which parts should change, and why your next prompt takes that direction.
+**What worked:** The source documents produced a concrete, evidence-based plan: resume claims shaped the initial positioning and candidate case studies; the transcript confirmed relevant coursework; and the rubric was converted into explicit acceptance gates. The student has not yet evaluated the proposed content or visual direction, so no student approval is claimed.
+
+**What did not work:** The first version of this prompt log used a generic `Student annotation needed` line instead of explicitly documenting what worked, what did not, why, and how prompting evolved. The student later identified this as insufficient for the Excellent rubric descriptor.
+
+**Why:** The AI captured actions, sources, and an annotation request but did not mirror the rubric's required evaluative structure closely enough.
+
+**How the next prompt changed:** The student paused implementation and specifically required retroactive and future `what worked / what did not / why / next change` annotations, while also reiterating that every other Excellent-level requirement must be audited.
+
+**Student annotation needed:** After reviewing the first implemented design checkpoint, explain what feels aligned or misaligned with your target roles and sleek/modern preference, what should change, and why.
+
+## 2026-11-08 15:54 EST - Prompt-log correction and rubric-control refinement
+
+**Build stage:** Process correction before portfolio UI implementation
+
+**Student prompt (faithful summary):** Pause because the prompt log is not explicitly annotating what worked, what did not, and why, as required by the Excellent rubric. Correct the previous entries, use that structure for future entries, continue the build, and ensure every other Excellent-level instruction is followed rather than waiting for the student to catch omissions.
+
+**Action/output:** Paused UI implementation before any portfolio-interface files were changed; audited the existing log; rewrote the earlier entries with explicit evaluation and prompt-evolution fields; preserved unknown student opinions as annotation requests; and created a second saved plan focused on prompt quality and a recurring rubric-control audit.
+
+**Sources used:** The student's correction supplied the evaluation; the rubric's Prompt Log & Iterative Refinement descriptor defined the required structure; `AGENTS.md` supplied the non-invention rule and the requirement to preserve later plans separately.
+
+**Relevant files:** `docs/prompt-log.md`, `docs/plans/02-prompt-strategy-and-rubric-control.md`
+
+**What worked:** The prompt log was created at the start of the project and the build was still early enough to correct its structure without reconstructing a long missing history. The student explicitly identified the grading gap and the desired correction.
+
+**What did not work:** The AI treated an open-ended annotation request as sufficient evidence of iterative refinement. It was not sufficient because it omitted the rubric's explicit evaluative fields and did not show the causal link between evaluation and the next prompt.
+
+**Why:** The AI followed the general prompt-log rule but did not perform a close enough field-by-field check against the Excellent descriptor before continuing.
+
+**How the next prompt/action changed:** Future entries will always include the prompt, action/output, sources, what worked, what did not, why, and the resulting change. At each milestone, the AI will also run a full Excellent-level rubric audit so prompt logging is not the only criterion checked closely.
+
+**Student annotation needed:** Confirm whether this revised structure captures the level of evaluation you intended. After the first visual checkpoint, add your own assessment of the actual design and content so the next refinement is genuinely student-driven.
 
