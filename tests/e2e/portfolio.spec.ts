@@ -133,3 +133,31 @@ test("real project screenshots load and the supplied repository link is exposed"
     expect(positions[1]).toBeGreaterThan(positions[0]);
   }
 });
+
+test("background treatment spans the viewport while content stays bounded", async ({ page }) => {
+  await page.goto("/");
+
+  const geometry = await page.locator(".background-section").evaluate((section) => {
+    const inner = section.querySelector<HTMLElement>(":scope > .section-shell");
+
+    if (!inner) {
+      throw new Error("Background section is missing its inner content shell");
+    }
+
+    const sectionBox = section.getBoundingClientRect();
+    const innerBox = inner.getBoundingClientRect();
+
+    return {
+      sectionLeft: sectionBox.left,
+      sectionRight: sectionBox.right,
+      innerLeft: innerBox.left,
+      innerRight: innerBox.right,
+      viewportWidth: window.innerWidth,
+    };
+  });
+
+  expect(geometry.sectionLeft).toBe(0);
+  expect(geometry.sectionRight).toBe(geometry.viewportWidth);
+  expect(geometry.innerLeft).toBeGreaterThan(geometry.sectionLeft);
+  expect(geometry.innerRight).toBeLessThan(geometry.sectionRight);
+});
