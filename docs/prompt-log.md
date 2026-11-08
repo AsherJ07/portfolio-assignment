@@ -211,3 +211,5 @@ This log records the student's real requests or faithful concise summaries, the 
 
 **Student annotation needed:** Confirm that the smaller split-card Fashion image remains readable enough. Provide the actual Cloud Run settings and public service URL so the proposed deployment guide can become observed rubric evidence.
 
+**Release checkpoint:** Commits `b7f87e1` (`fix: align fashion media with project cards`) and `e9d2456` (`docs: clarify deployment rubric evidence`) were pushed on `codex/refine-project-layout`. GitHub pull request #3, “Refine Fashion project layout and deployment evidence,” was opened against `main` for student review.
+
