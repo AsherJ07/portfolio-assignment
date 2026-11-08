@@ -374,13 +374,6 @@ svg { display: block; }
   background: var(--surface);
   box-shadow: 0 10px 30px rgb(17 24 39 / 10%);
 }
-.project-card--wide-media {
-  grid-template-columns: 1fr;
-}
-.project-card--wide-media .project-card__visual {
-  border-top: var(--line);
-  border-left: 0;
-}
 .project-visual { width: 100%; height: auto; border: var(--line-thin); background: var(--ink); box-shadow: 5px 5px 0 var(--ink); }
 .project-visual .visual-bg { fill: #132034; }
 .project-visual .visual-rule { fill: none; stroke: #b4c1cf; stroke-opacity: 0.32; }

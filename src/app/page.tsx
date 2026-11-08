@@ -94,15 +94,7 @@ export default function HomePage() {
 
           <div className="project-list section-shell">
             {featuredProjects.map((project, index) => (
-              <article
-                className={`project-card${
-                  project.visual.kind === "screenshot" &&
-                  project.visual.presentation === "wide"
-                    ? " project-card--wide-media"
-                    : ""
-                }`}
-                key={project.slug}
-              >
+              <article className="project-card" key={project.slug}>
                 <div className="project-card__intro">
                   <p className="project-number">Case study 0{index + 1}</p>
                   <p className="eyebrow">{project.eyebrow}</p>
@@ -134,17 +126,15 @@ export default function HomePage() {
                       width={project.visual.width}
                       height={project.visual.height}
                       alt={project.visual.alt}
-                      sizes={
-                        project.visual.presentation === "wide"
-                          ? "(max-width: 1280px) calc(100vw - 3rem), 1200px"
-                          : "(max-width: 1088px) calc(100vw - 3rem), 680px"
-                      }
+                      sizes="(max-width: 1088px) calc(100vw - 3rem), 680px"
                       quality={85}
                     />
                   ) : (
                     <ProjectVisual type={project.visual.type} />
                   )}
-                  <figcaption>{project.visual.caption}</figcaption>
+                  {project.visual.caption ? (
+                    <figcaption>{project.visual.caption}</figcaption>
+                  ) : null}
                 </figure>
 
                 <div className="case-study-grid">

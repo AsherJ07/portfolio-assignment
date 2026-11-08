@@ -12,8 +12,7 @@ type ProjectMedia =
       width: number;
       height: number;
       alt: string;
-      caption: string;
-      presentation?: "standard" | "wide";
+      caption?: string;
     };
 
 export type Project = {
@@ -85,7 +84,6 @@ export const featuredProjects: readonly Project[] = [
       width: 1800,
       height: 913,
       alt: "YouTube Creator Insights benchmarking interface with category, channel, and publication filters plus summary metrics for videos, channels, views, median views, and public interaction.",
-      caption: "Creator Intelligence benchmarking interface supplied by Asher Javaid.",
     },
     link: {
       href: "https://github.com/AsherJ07/purdue-youtube-ip-new",
@@ -140,8 +138,6 @@ export const featuredProjects: readonly Project[] = [
       width: 1646,
       height: 380,
       alt: "AI Fashion Trend Radar workflow connecting input parsing, taxonomy generation, term extraction, TikTok and Google Trends analysis, trend comparison, aggregation, and report generation.",
-      caption: "AI Fashion Trend Radar agent workflow supplied by Asher Javaid.",
-      presentation: "wide",
     },
   },
 ];
