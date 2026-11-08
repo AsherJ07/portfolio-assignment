@@ -10,7 +10,7 @@ This document records observed results as the portfolio is built. It distinguish
 - npm: `10.9.2`
 - Framework: Next.js `16.4.5`, React `19.3.1`, TypeScript `6.0.3`
 - Browser used for visual QA: Google Chrome
-- Current verified application branch: `codex/pixel-inspired-portfolio` (professional color refinement pending PR)
+- Current verified application branch: `codex/refine-project-layout`
 
 ## Automated quality checks
 
@@ -61,11 +61,20 @@ Remote evidence: [pull request #1](https://github.com/AsherJ07/portfolio-assignm
 
 - Creator Intelligence now uses the supplied dashboard capture, resized from 2938×1490 to 1800×913 while preserving its aspect ratio and readable interface content.
 - AI Fashion Trend Radar uses the supplied 1646×380 workflow image without cropping its wide process structure.
-- Both images render through Next.js Image with declared dimensions, responsive `sizes`, lazy loading, descriptive alt text, and explicit captions.
+- Both images render through Next.js Image with declared dimensions, responsive `sizes`, lazy loading, and descriptive alt text.
 - The Creator repository URL was independently resolved through GitHub and is rendered as a descriptive external link.
 - The Fashion case study intentionally has no repository/demo link or quantified business outcome because neither was supplied.
 - `npm run test:e2e` passed 14/14 checks across desktop Chrome and `375x812` mobile Chrome, including axe, overflow, image decoding, and the exact Creator repository URL.
-- A desktop visual pass confirmed that the Creator screenshot remains readable in the split card and the Fashion workflow uses a full-width media row without clipping or awkward cropping.
+- A desktop visual pass confirmed that the Creator screenshot remains readable in the split card. The initially full-width Fashion workflow was later revised after student review; see the checkpoint below.
+
+### Project-card consistency checkpoint - 2026-11-08
+
+- Removed the visible Creator and Fashion screenshot provenance captions while preserving descriptive image alternatives for screen-reader users.
+- Returned AI Fashion Trend Radar to the same responsive card layout as the other case studies: narrative on the left and a contained image on the right at desktop widths, then a single-column reflow on mobile.
+- Deleted the now-unused Fashion-specific wide-media CSS and rendering branch.
+- `npm run lint`, `npm run typecheck`, `npm test -- --run`, and `npm run build` all passed.
+- `npm run test:e2e` passed 14/14 checks across desktop Chrome and `375x812` mobile Chrome. The suite now asserts that the removed caption is not visible and that the Fashion screenshot sits to the right of its heading at desktop width.
+- A production-browser visual pass at desktop width confirmed the smaller workflow is contained beside the text, remains uncropped, and introduces no awkward empty media row.
 
 ## Responsive visual checks
 

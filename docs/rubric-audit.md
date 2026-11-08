@@ -2,14 +2,14 @@
 
 **Audit date:** 2026-11-08
 
-**Checkpoint:** Authentic project evidence revision on `codex/add-project-evidence`
+**Checkpoint:** Project-card consistency revision on `codex/refine-project-layout`
 
 **Status vocabulary:** Passed locally, Partial, Pending, Blocked on student decision, or Out of scope
 
 | Rubric area | Status | Current evidence | Remaining gate |
 | --- | --- | --- | --- |
 | Required sections and projects | Partial | Tailored hero, navigation, four mini case studies with context/contribution/result or learning, technologies, evidence, two authentic screenshots, original illustrations for the remaining projects, verified Creator repository link, skills, background, and contact section | Student approval of Fashion role/outcome; any additional genuine project links or screenshots where available |
-| Dynamic app and Cloud Run | Partial | Next.js application; dynamic health/contact routes; verified self-contained standalone server; health/CSS/404 checks; multi-stage non-root Dockerfile; deliberate settings guide | Install/approve container runtime and verify image; confirm private GitHub/GCP targets; branch trigger; Cloud Run deployment; public HTTPS verification |
+| Dynamic app and Cloud Run | Partial | Next.js application; dynamic health/contact routes; verified self-contained standalone server; health/CSS/404 checks; hand-tuned multi-stage non-root Dockerfile; deliberate Cloud Run settings and cost/latency tradeoffs documented as beyond-default work | Record actual deployed settings and public URL; verify the image where a container runtime is available; confirm private repository/deployment branch; observe push trigger and Cloud Run revision |
 | Prompt log and iterative refinement | Partial | Whole-build log started at intake; correction prompt explicitly records what worked, failed, why, sources, and next change | Student-authored evaluation of the visual/content checkpoint; continue through deployment |
 | Responsive design | Passed locally | Browser evidence at `375x812`, `768x1024`, `1440x900`, and both sides of every implemented breakpoint; no horizontal overflow | Repeat after form and later layout changes; cross-browser pass before final handoff |
 | Professional polish | Partial | Distinctive restrained identity, documented tokens, authentic screenshots plus original SVGs, hierarchy, metadata, favicon, 404, reduced-motion CSS, passing desktop/mobile axe and link/image checks | Full proofread, extended keyboard/zoom/contrast pass, production console check, Lighthouse |

@@ -38,6 +38,17 @@ curl --fail http://localhost:8080/api/health
 
 Also verify `/`, `/api/contact`, a missing route, direct refresh, CSS/assets, runtime logs, and the non-root process before using the image for deployment.
 
+## Excellent-level deployment evidence
+
+The repository already implements two forms of work beyond a default framework deployment:
+
+1. The hand-tuned `Dockerfile` uses separate dependency, build, and minimal runtime stages; pins the Node runtime; installs from the lockfile; ships Next.js standalone output; runs as a dedicated non-root user; honors Cloud Run's `PORT`; binds to `0.0.0.0`; and includes a health check.
+2. The Cloud Run settings below deliberately address latency, cost control, scaling, public grading access, and request behavior instead of accepting undocumented defaults.
+
+The rubric examples are alternatives, not a requirement to implement every example. A custom domain is therefore optional and should not be added solely for grading, especially when it would introduce DNS work or ongoing cost. To make the existing implementation conclusive grading evidence, replace the proposed values below with the observed deployed values and complete the live verification record after inspecting the service. A sanitized `gcloud run services describe` output or Cloud Run settings screenshot may be referenced as evidence, but it must not expose secrets or private contact data.
+
+This beyond-default container/settings evidence is distinct from the assignment's separate push-triggered redeployment requirement. The latter still requires a successful deployment-branch trigger and observed Cloud Run revision.
+
 ## Proposed Cloud Run settings
 
 These are conservative recommendations for a low-traffic student portfolio. They are proposals until the student confirms the GCP project, region, billing context, and cost tolerance.
@@ -142,5 +153,18 @@ Pending. At deployment time record:
 - public HTTPS URL;
 - health, home, direct-route, missing-route, static asset, and contact results;
 - timestamp and any known limitation.
+
+Recommended non-sensitive evidence fields:
+
+| Field | Observed value |
+| --- | --- |
+| GCP project identifier | Pending student confirmation |
+| Service and region | Pending student confirmation |
+| Deployment branch | Pending student confirmation |
+| Commit SHA / workflow run | Pending |
+| Cloud Run revision / image digest | Pending |
+| CPU / memory / min-max instances / concurrency / timeout | Pending observed service settings |
+| Public HTTPS URL | Pending |
+| `/api/health`, home, direct navigation, 404, assets, and contact | Pending production verification |
 
 Keep the public service running and unchanged until grading is complete.
