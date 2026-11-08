@@ -213,3 +213,25 @@ This log records the student's real requests or faithful concise summaries, the 
 
 **Release checkpoint:** Commits `b7f87e1` (`fix: align fashion media with project cards`) and `e9d2456` (`docs: clarify deployment rubric evidence`) were pushed on `codex/refine-project-layout`. GitHub pull request #3, “Refine Fashion project layout and deployment evidence,” was opened against `main` for student review.
 
+## 2026-11-08 18:52 EST - Deployed-layout mismatch and Background border correction
+
+**Build stage:** Student review of the currently deployed revision
+
+**Student prompt (faithful summary):** Reported that the Fashion workflow screenshot still appears below its text and that the Background section's borders look cut out, with a desktop screenshot showing the visual defect.
+
+**Action/output:** Confirmed locally that the Fashion side-by-side correction is present on `codex/refine-project-layout` but not yet on the deployed `main`, because pull request #3 has not been merged. Inspected the Background markup and CSS and identified a separate defect: the `section-shell` width constraint was applied directly to the section carrying the background and top border, causing the band to stop at the content-container edges. Refactored the section into a full-width band with an inner content shell and added a geometry regression test. Lint, strict type checking, 11 unit/component/API tests, production build, and 16/16 desktop/mobile browser checks passed. Desktop visual inspection confirmed both the side-by-side Fashion card and the continuous Background surface.
+
+**Sources used:** The student's deployed-site screenshot identified the visible Background defect. Current branch markup/CSS and the unmerged pull-request workflow explain the Fashion mismatch. `AGENTS.md` and the responsive-layout rubric require intentional full-width sections, bounded readable content, and observed browser evidence.
+
+**Relevant files:** `docs/plans/08-background-band-and-deployment-visibility-plan.md`, `docs/prompt-log.md`, `src/app/page.tsx`, `src/app/globals.css`, and `tests/e2e/portfolio.spec.ts`
+
+**What worked:** The previously implemented Fashion layout is present and covered by a desktop geometry assertion on the review branch. The shared `section-shell` remains the correct mechanism for bounding readable content.
+
+**What did not work:** The student reviewed the deployed `main` revision before the open pull request was merged, so the public site could not contain the Fashion correction. The Background section combined full-width band styling with a constrained container on the same element, producing visually truncated border and surface edges.
+
+**Why:** Branch changes do not reach the public service until they are merged into the deployment branch and its trigger succeeds. The Background defect came from assigning two different layout responsibilities—page band and content container—to one DOM element.
+
+**How the next prompt/action changed:** The Background section is now a full-width semantic band containing an inner `section-shell`, and browser coverage verifies both geometries. The updated branch must now be reviewed, merged, and observed through the `main` deployment trigger before evaluating the public result.
+
+**Student annotation needed:** After the revised pull request deploys, confirm whether the Fashion image scale is readable and whether the Background section now feels continuous rather than boxed or cut off.
+
