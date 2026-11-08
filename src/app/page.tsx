@@ -1,4 +1,5 @@
 import { ArrowUpRightIcon, LinkedInIcon, MailIcon } from "@/components/icons";
+import { ContactForm } from "@/components/contact-form";
 import { ProjectVisual } from "@/components/project-visual";
 import { SiteHeader } from "@/components/site-header";
 import { education, experience, featuredProjects, skillGroups } from "@/data/portfolio";
@@ -239,36 +240,37 @@ export default function HomePage() {
 
         <section className="contact-section" id="contact" aria-labelledby="contact-title">
           <div className="section-shell contact-grid">
-            <div>
+            <div className="contact-intro">
               <p className="eyebrow">Contact</p>
               <h2 id="contact-title">Let&apos;s make the next decision clearer.</h2>
               <p>
                 I&apos;m interested in thoughtful product, analytics, and applied AI work where
                 customer context and technical evidence both matter.
               </p>
+              <div className="contact-links" aria-label="Professional contact links">
+                <a href="mailto:asherjavaid700@gmail.com">
+                  <MailIcon />
+                  <span>
+                    <small>Email</small>
+                    asherjavaid700@gmail.com
+                  </span>
+                  <ArrowUpRightIcon />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/asher-javaid-210160242/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <LinkedInIcon />
+                  <span>
+                    <small>LinkedIn</small>
+                    Connect professionally
+                  </span>
+                  <ArrowUpRightIcon />
+                </a>
+              </div>
             </div>
-            <div className="contact-links" aria-label="Professional contact links">
-              <a href="mailto:asherjavaid700@gmail.com">
-                <MailIcon />
-                <span>
-                  <small>Email</small>
-                  asherjavaid700@gmail.com
-                </span>
-                <ArrowUpRightIcon />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/asher-javaid-210160242/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <LinkedInIcon />
-                <span>
-                  <small>LinkedIn</small>
-                  Connect professionally
-                </span>
-                <ArrowUpRightIcon />
-              </a>
-            </div>
+            <ContactForm />
           </div>
         </section>
       </main>
