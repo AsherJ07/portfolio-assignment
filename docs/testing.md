@@ -10,7 +10,7 @@ This document records observed results as the portfolio is built. It distinguish
 - npm: `10.9.2`
 - Framework: Next.js `16.4.5`, React `19.3.1`, TypeScript `6.0.3`
 - Browser used for visual QA: Google Chrome
-- Current verified application commits: `a4f68ef` (portfolio UI), `19c39e1` (contact pipeline)
+- Current verified application branch: `codex/pixel-inspired-portfolio` (professional color refinement pending PR)
 
 ## Automated quality checks
 
@@ -35,6 +35,24 @@ Tests currently cover:
 - honest unconfigured-delivery response;
 - delivery-provider failure response without false success;
 - success only after the provider accepts the message.
+
+### Pre-PR release gate - 2026-11-08
+
+The professionally refined color direction was checked before remote publication:
+
+| Command | Observed result |
+| --- | --- |
+| `npm run lint` | Passed with zero warnings |
+| `npm run typecheck` | Passed with no TypeScript errors |
+| `npm test -- --run` | Passed: 5 files, 10 tests |
+| `npm run build` | Passed; standalone assets staged and all expected routes generated |
+| `npm run test:e2e` | Passed after one contrast correction: 12/12 Playwright tests across desktop Chrome and `375x812` mobile Chrome |
+
+The first browser run found the small coral `Case study` label at 3.39:1 on white. It was darkened from `#e95e4f` to `#a9322a`, then both desktop and mobile axe checks passed with no serious or critical findings. The suite also observed no horizontal overflow, reachable direct anchors, honest unconfigured contact feedback, a useful 404 recovery action, reduced-motion behavior, and valid local hash/link targets.
+
+The initial non-escalated Playwright attempt could not bind `0.0.0.0:3010` (`EPERM`) under the filesystem sandbox. The same committed suite ran successfully with local-server permission; this was an environment constraint, not an application failure.
+
+An audit retry during this checkpoint could not reach `registry.npmjs.org` because DNS/network access was restricted. The earlier network-enabled production audit result of zero vulnerabilities remains the latest completed audit evidence; no new passing result is inferred.
 
 ## Responsive visual checks
 
@@ -89,7 +107,7 @@ Docker CLI and Docker Desktop were not installed, so image build/run evidence re
 - Contact form is implemented, but real inbox delivery remains blocked on an approved provider, sender, destination, and secret configuration.
 - Email and LinkedIn details shown locally require student confirmation before public deployment.
 - Project repository/demo links and real screenshots have not been supplied; current visuals are intentionally labeled illustrations.
-- Automated accessibility tooling and the full manual keyboard/zoom/contrast pass remain pending.
+- Automated axe checks now pass at desktop and mobile sizes; extended manual zoom and additional-viewport checks remain pending after the PR checkpoint.
 - External-link validation, spelling/grammar audit, console-log audit, and image/link crawler remain pending.
 - Lighthouse scores have not yet been collected.
 - Local multi-stage container build, non-root process, image health, and containerized route checks remain pending because no container runtime is installed.
