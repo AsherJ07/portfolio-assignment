@@ -281,3 +281,5 @@ This log records the student's real requests or faithful concise summaries, the 
 
 **Student annotation needed:** Decide whether to change the GitHub repository from public to private before submission to match the assignment's explicit technical requirement. After merging the final PR, confirm the public page source reports the Cloud Run HTTPS origin in its Open Graph URL.
 
+**Release checkpoint:** Commits `0fc4aa2` (`docs: plan final public evidence pass`), `3c92995` (`build: set canonical site URL in container`), and `56767c1` (`docs: publish final portfolio evidence`) were pushed on `codex/final-public-docs`. GitHub pull request #6, “Finalize public documentation and release evidence,” was opened against `main` for final student review. The final deployment metadata verification remains post-merge evidence because pull requests do not deploy.
+
