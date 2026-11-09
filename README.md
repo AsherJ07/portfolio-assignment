@@ -1,24 +1,42 @@
-# Asher Javaid Portfolio
+# Asher Javaid - Product & Analytics Portfolio
 
-An employer-facing product and analytics portfolio built for Purdue MIS 58710 IA 3. The application presents selected work as evidence-led case studies and is designed for deployment to Google Cloud Run.
+An employer-facing portfolio for product management, product analytics, data science, and applied AI work. The site presents selected projects as concise case studies focused on the problem, contribution, evidence, and result.
 
-## Current status
+[View the live portfolio](https://portfolio-1033708826767.us-central1.run.app/)
 
-The local application, responsive experience, contact pipeline, and production build are implemented and tested. Container execution, real contact delivery, private GitHub-triggered Cloud Run deployment, Lighthouse/accessibility completion, and public HTTPS verification remain pending. See [the rubric audit](docs/rubric-audit.md) for the current evidence status.
+## Highlights
 
-## Stack
+- Four career-tailored project case studies spanning applied AI, creator intelligence, multilingual fact-checking, and trend analysis
+- Context-based skill indicators grounded in production, research, coursework, and delivery experience
+- Responsive layouts designed for mobile, tablet, and desktop
+- Accessible navigation, visible focus treatment, reduced-motion support, semantic structure, and descriptive image alternatives
+- Validated contact form with spam controls, delivery feedback, and direct professional contact links
+- Custom metadata, favicon, health endpoint, and polished not-found experience
+
+## Technology
 
 - Next.js 16 App Router and React 19
 - strict TypeScript
-- custom responsive CSS and original inline SVG visuals
-- Zod validation shared by the contact UI/API
-- Vitest and Testing Library
-- standalone Next.js runtime and multi-stage Dockerfile
-- GitHub Actions quality checks
+- custom responsive CSS with documented design tokens
+- Zod validation shared by the contact interface and server route
+- Vitest, Testing Library, Playwright, and axe-core
+- standalone Next.js runtime in a multi-stage Docker image
+- GitHub Actions quality checks and commit-traceable Google Cloud Build deployment
 
-## Local setup
+## Architecture
 
-Requirements: Node.js `22.16.0` or another compatible Node version accepted by the package engine.
+- `src/app/` contains routes, metadata, global styles, health/contact handlers, the favicon, and the not-found experience.
+- `src/components/` contains the focused client interaction boundary and reusable interface components.
+- `src/data/portfolio.ts` keeps portfolio content typed and reviewable.
+- `src/lib/contact.ts` owns shared contact validation and response types.
+- `scripts/prepare-standalone.mjs` stages static assets for the standalone runtime.
+- `cloudbuild.yaml` runs quality gates, builds the committed Dockerfile, publishes a commit-tagged image, and deploys that exact image to Cloud Run.
+
+Server components are the default. Client-side JavaScript is limited to the mobile navigation and contact form state.
+
+## Local development
+
+Requirements: Node.js `22.16.0` or a compatible release accepted by the package engine.
 
 ```bash
 npm ci
@@ -28,30 +46,7 @@ npm run dev
 
 Open `http://localhost:3000`.
 
-The form fails honestly until a delivery provider is configured. Do not place real secrets in `.env.example` or source control.
-
-## Scripts
-
-| Script | Purpose |
-| --- | --- |
-| `npm run dev` | Start the local development server |
-| `npm run lint` | Run ESLint with zero warnings allowed |
-| `npm run typecheck` | Run strict TypeScript checking without emit |
-| `npm test` | Run unit, content, interaction, and API tests |
-| `npm run build` | Build and stage self-contained standalone output |
-| `npm start` | Run the standalone production server on `PORT` |
-| `npm run check` | Run lint, typecheck, tests, and build |
-
-## Architecture
-
-- `src/app/` contains routes, metadata, global styles, health/contact handlers, favicon, and not-found experience.
-- `src/components/` contains the small client interaction boundary and reusable visuals/form UI.
-- `src/data/portfolio.ts` keeps portfolio claims typed and auditable.
-- `src/lib/contact.ts` owns shared validation and response types.
-- `scripts/prepare-standalone.mjs` stages static assets into the standalone runtime.
-- `docs/` records plans, prompts, tests, rubric status, rule evolution, and deployment work.
-
-Server components are the default. Client JavaScript is limited to the mobile navigation and contact form state. Project visuals are original illustrations and are explicitly not presented as product screenshots.
+The contact form requires a Resend API key, a verified sender, and a destination address for delivery. Environment names and safe descriptions are provided in `.env.example`; secret values must remain outside source control.
 
 ## Quality commands
 
@@ -60,24 +55,26 @@ npm run lint
 npm run typecheck
 npm test
 npm run build
+npm run test:e2e:run
 ```
 
-Observed results and limitations belong in [docs/testing.md](docs/testing.md); a checklist alone is not considered evidence.
+The automated suite covers content integrity, API behavior, form interaction, navigation, responsive overflow, project media, not-found handling, reduced motion, and serious/critical accessibility violations.
 
-## Documentation
+## Container and deployment
 
-- [Original plan](docs/plans/01-original-plan.md)
-- [Prompt-strategy revision](docs/plans/02-prompt-strategy-and-rubric-control.md)
-- [Prompt log](docs/prompt-log.md)
-- [Testing evidence](docs/testing.md)
-- [Excellent-level rubric audit](docs/rubric-audit.md)
-- [Deployment guide](docs/deployment.md)
-- [Rules evolution](docs/rules-evolution.md)
+The production image uses separate dependency, build, and minimal runtime stages, pins the Node runtime, ships only the standalone server output, and runs as an unprivileged user. The server honors Cloud Run's `PORT` contract and exposes `/api/health` for rollout verification.
 
-## Privacy and source documents
+Pushes to `main` invoke the repository-owned Cloud Build pipeline. Each deployment is tagged and labeled with the triggering commit SHA, providing a direct audit trail from source to the active Cloud Run revision.
 
-Assignment source documents, resumes, and transcripts are intentionally outside this repository. No credential values should be committed. Phone number is omitted from the public UI; public email and LinkedIn details still require final student confirmation.
+## Engineering documentation
 
-## Reflection
+- [Deployment architecture and operations](docs/deployment.md)
+- [Testing and verification evidence](docs/testing.md)
+- [Original and revised implementation plans](docs/plans/)
+- [Prompt and iteration history](docs/prompt-log.md)
+- [Project rules and their evolution](AGENTS.md)
+- [Rubric evidence matrix](docs/rubric-audit.md)
 
-The student's assignment reflection is intentionally out of scope and is not created or edited by this project.
+## Privacy and security
+
+Credentials, private keys, local environment files, source resumes, transcripts, and assignment source documents are excluded from the repository and production image. The public portfolio omits the phone number and exposes only the professional contact channels intentionally presented on the site.

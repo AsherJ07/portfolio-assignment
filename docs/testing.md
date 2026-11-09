@@ -131,34 +131,50 @@ The build now stages `.next/static` and optional public assets inside `.next/sta
 | Browser at `375x812` | CSS loaded, hero computed to `48.75px`, no horizontal overflow |
 | Missing route | HTTP `404` with the custom not-found experience |
 
-Docker CLI and Docker Desktop were not installed, so image build/run evidence remains pending rather than inferred from the Dockerfile.
+Docker CLI and Docker Desktop were not installed on this Mac. Cloud Build and the active Cloud Run revision provide the container build/run evidence recorded below; no unsupported local result is inferred.
 
-## Known limitations and pending verification
+## Final verification checkpoint - 2026-11-08
 
-### Cloud Build source repair checkpoint - 2026-11-08
-
-The public service remained on source commit `f6bfa84` after GitHub `main` advanced to `fd46458`. Read-only trigger inspection showed that pushes to `main` expected `/cloudbuild.yaml`, but the repository did not contain that file.
+### Repository and local release candidate
 
 | Check | Observed result |
 | --- | --- |
-| `cloudbuild.yaml` YAML parse | Passed; four ordered steps were present |
-| `git diff --check` | Passed |
-| `npm run lint` | Passed with zero warnings |
-| `npm run typecheck` | Passed |
-| `npm test -- --run` | Passed: 5 files, 11 tests |
-| `npm run build` | Passed; expected application/API routes generated and standalone assets staged |
+| `npm run check` | Passed: lint with zero warnings, strict TypeScript, 5 test files/11 tests, and production build |
+| `npm run test:e2e:run` | Passed: 16/16 desktop/mobile Chrome checks |
+| Automated accessibility | No serious or critical axe violations at desktop or mobile widths |
+| Responsive behavior | Required and breakpoint-adjacent viewports passed without horizontal overflow |
+| Metadata build input | Cloud Build now passes the verified public HTTPS origin into the Docker builder; generated production HTML reported that origin in `og:url` |
 
-The configuration runs quality gates, builds the committed multi-stage Dockerfile, pushes an image tagged with Cloud Build's triggering commit SHA, and deploys that exact image to the existing `portfolio` service in `us-central1`. It also records the commit SHA as a revision label. The deploy command deliberately omits environment-variable, secret, scaling, traffic, and access flags so it does not overwrite working service configuration.
+### GitHub, container, and Cloud Run
 
-Still pending: merge the review pull request, observe the `main` trigger, confirm the resulting Cloud Run revision label and image tag match the merge commit, call `/api/health`, and verify the public page no longer contains the removed screenshot captions and shows the corrected project/Background layouts.
+- Pull request #5 merged as `4f83257495735ff06ca2cafba3334d101164ec72`.
+- GitHub Actions run `42539147070` passed on that `main` commit.
+- Cloud Build `6a23e5cb-baed-4c5a-a6e5-9c7596b9929d` built the committed multi-stage Dockerfile and completed successfully.
+- Cloud Run revision `portfolio-00009-28h` is Ready, receives 100% of traffic, and has a commit label and image tag matching the merge commit.
+- The resolved production image digest is `sha256:8856cf9651caad0c097f7597027fa7d7037316f3d83884e7a878c37808e4e389`.
+- The public health endpoint returned HTTP 200 with `{"status":"ok"}`; the home page returned 200 and a missing route returned 404.
 
-- The student reports that deployed Resend delivery now succeeds after environment configuration; direct non-sensitive inbox/provider-log evidence has not yet been captured by the agent.
-- Email and LinkedIn details shown locally require student confirmation before public deployment.
-- The Creator project now has a verified repository and real screenshot. Fashion has a real workflow image but still needs any available repository/demo, confirmed constraints, and measured outcome; the other two projects retain intentionally labeled illustrations.
-- Automated axe checks now pass at desktop and mobile sizes; extended manual zoom and additional-viewport checks remain pending after the PR checkpoint.
-- External-link validation, spelling/grammar audit, console-log audit, and image/link crawler remain pending.
-- Lighthouse scores have not yet been collected.
-- Local multi-stage container build, non-root process, image health, and containerized route checks remain pending because no container runtime is installed.
-- Private-repository status, GitHub-trigger evidence, Cloud Run revision/settings, public HTTPS routes, and direct production-delivery evidence remain pending in this document.
+### Live browser and link evidence
 
-These pending checks prevent any claim that the assignment or Excellent-level rubric is complete.
+- Read-only Chrome passes at `375x812`, `768x1024`, and `1440x900` observed no horizontal overflow, browser console errors, or page errors.
+- Both authentic project screenshots completed loading with non-zero natural widths at all three live viewports.
+- The removed “supplied by Asher Javaid” captions are absent from the public page.
+- The Creator Intelligence repository returned HTTP 200. LinkedIn returned its automated-client status 999, which is an anti-bot response rather than evidence of a malformed profile URL.
+- The student confirmed that the live Resend-backed contact form delivered successfully after configuration. Automated tests independently cover validation, provider acceptance/failure, and user feedback states without sending or recording private message content.
+
+### Lighthouse
+
+| Profile | Performance | Accessibility | Best Practices | SEO | Key observations |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Desktop production | 100 | 100 | 100 | 100 | FCP 0.3s, LCP 0.5s, TBT 0ms, CLS 0 |
+| Mobile production | 82 | 100 | 100 | 100 | FCP 1.0s, LCP 1.9s, CLS 0; one run reported 700ms TBT, including a 571ms unattributable task |
+
+The desktop representative page exceeds the repository's 90-point target in every category. The mobile result preserves strong visual-loading and stability metrics but leaves a documented performance-variance opportunity outside the scored course rubric.
+
+### Explicit limitations
+
+- A local Docker CLI was not available, so the image was not run on this Mac. The same committed Dockerfile was built successfully by Cloud Build and verified through the Ready Cloud Run revision and live health/routes.
+- The GitHub repository is public by student choice; the assignment instructions specify a private repository.
+- The deployed provider credential should be stored through Secret Manager and rotated if it was ever exposed during console review. No credential value is present in source or this evidence record.
+
+All seven in-scope implementation criteria have current evidence. The separate reflection remains student-owned.

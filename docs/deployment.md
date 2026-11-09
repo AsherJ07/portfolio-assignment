@@ -1,6 +1,6 @@
 # Deployment Guide
 
-This guide separates implemented repository configuration from student-owned cloud setup and final verification. No cloud deployment is claimed until a GitHub-triggered rollout and the public HTTPS service are directly observed.
+This guide records the implemented container architecture, push-triggered deployment, observed Cloud Run settings, operations guidance, and verified public release.
 
 ## Runtime architecture
 
@@ -45,35 +45,35 @@ The repository already implements two forms of work beyond a default framework d
 1. The hand-tuned `Dockerfile` uses separate dependency, build, and minimal runtime stages; pins the Node runtime; installs from the lockfile; ships Next.js standalone output; runs as a dedicated non-root user; honors Cloud Run's `PORT`; binds to `0.0.0.0`; and includes a health check.
 2. The Cloud Run settings below deliberately address latency, cost control, scaling, public grading access, and request behavior instead of accepting undocumented defaults.
 
-The rubric examples are alternatives, not a requirement to implement every example. A custom domain is therefore optional and should not be added solely for grading, especially when it would introduce DNS work or ongoing cost. To make the existing implementation conclusive grading evidence, replace the proposed values below with the observed deployed values and complete the live verification record after inspecting the service. A sanitized `gcloud run services describe` output or Cloud Run settings screenshot may be referenced as evidence, but it must not expose secrets or private contact data.
+The rubric examples are alternatives, not a requirement to implement every example. A custom domain is therefore optional and should not be added solely for grading, especially when it would introduce DNS work or ongoing cost. The hand-tuned container, commit-traceable pipeline, and observed settings below provide the beyond-default deployment evidence.
 
-This beyond-default container/settings evidence is distinct from the assignment's separate push-triggered redeployment requirement. The latter still requires a successful deployment-branch trigger and observed Cloud Run revision.
+This beyond-default container/settings evidence is distinct from the assignment's separate push-triggered redeployment requirement; both are verified in the live-release record.
 
-## Proposed Cloud Run settings
+## Observed Cloud Run settings
 
-These are conservative recommendations for a low-traffic student portfolio. They are proposals until the student confirms the GCP project, region, billing context, and cost tolerance.
+These values were read from the active service on 2026-11-08 without exposing environment values or credentials.
 
-| Setting | Proposed value | Rationale and tradeoff |
+| Setting | Observed value | Rationale and tradeoff |
 | --- | --- | --- |
-| Region | Student choice; nearest approved US region | Lower latency and simpler course alignment; region affects resource location |
-| Authentication | Public/unauthenticated | Required for grading; public exposure means contact abuse controls matter |
-| CPU | 1 vCPU | Sufficient for a small Next.js server without overprovisioning |
-| Memory | 512 MiB | Conservative starting point for Node/Next; verify after deployment |
-| Minimum instances | 0 | Avoids idle instance cost but permits cold starts |
-| Maximum instances | 3 | Caps unexpected scaling/cost while supporting grading traffic |
-| Concurrency | 40 | Balances a small CPU allocation against lightweight portfolio requests |
-| Request timeout | 60 seconds | More than sufficient for page and email-provider requests |
-| CPU allocation | Request-based | Minimizes idle cost for a low-traffic service |
-| Ingress | All | Required for the public grading URL |
+| Region | `us-central1` | Matches the build trigger and Artifact Registry location. |
+| Authentication | Public/unauthenticated | Makes the portfolio reachable for review; contact abuse controls remain enabled. |
+| CPU | 1 vCPU | Sufficient for the small Next.js server without overprovisioning. |
+| Memory | 512 MiB | Conservative allocation for the standalone Node runtime. |
+| Minimum instances | 0 | Avoids idle-instance cost while accepting possible cold starts. |
+| Maximum instances | Not explicitly set | Uses the platform ceiling; a lower cap can further constrain unexpected scaling cost. |
+| Concurrency | 80 | Supports lightweight portfolio traffic on one instance; monitor if server work becomes heavier. |
+| Request timeout | 300 seconds | Platform setting is generous for email-provider latency, though normal requests complete much faster. |
+| CPU allocation | Request-based (`cpu-throttling=true`) | Minimizes idle compute cost for a low-traffic service. |
+| Ingress | All | Required for the public HTTPS URL. |
 | Port | `8080` | Cloud Run convention; application honors `PORT` |
 
 Do not enable a custom domain, minimum instances above zero, global rate-limit datastore, or other ongoing paid resource without student approval.
 
-## Contact environment and secrets
+## Build, contact, and secret values
 
-The deployed service requires:
+The build and deployed service use:
 
-- `NEXT_PUBLIC_SITE_URL`: canonical public HTTPS URL;
+- `NEXT_PUBLIC_SITE_URL`: canonical public HTTPS URL supplied as a Docker build argument by `cloudbuild.yaml`;
 - `CONTACT_FROM_EMAIL`: provider-approved sender identity;
 - `CONTACT_TO_EMAIL`: private destination inbox;
 - `RESEND_API_KEY`: server-only provider credential.
@@ -109,9 +109,7 @@ After any pipeline change, confirm the new revision's `commit-sha` label and dep
 
 ### 2026-11-08 stale-source incident
 
-At 19:12 EST, GitHub `main` was at `fd46458`, but the public Cloud Run revision receiving 100% of traffic reported source commit `f6bfa84`. The connected `main` trigger was configured to read `/cloudbuild.yaml`, which did not exist in that source revision. The public site consequently remained healthy while serving older code. This repository-owned configuration repairs that missing contract; successful production repair remains pending the post-merge trigger and public verification.
-
-The currently observed service allocation was 1 vCPU, 512 MiB memory, concurrency 80, and a 300-second timeout. These observed values should be deliberately reviewed against the recommendations above after the source repair; changing them is a separate cloud action, not part of this pull request.
+At 19:12 EST, GitHub `main` was at `fd46458`, but the public Cloud Run revision receiving 100% of traffic reported source commit `f6bfa84`, and the connected trigger expected an absent `/cloudbuild.yaml`. Pull request #5 restored the repository-owned configuration. Cloud Build subsequently deployed merge commit `4f83257` as Ready revision `portfolio-00009-28h`; the revision label, image tag, and build substitution all match the merge commit.
 
 ## Required Google Cloud roles
 
@@ -124,9 +122,9 @@ Finalize least privilege against the selected workflow, but the deployment ident
 
 Avoid project-wide Owner or Editor roles. Record exact final roles after successful setup.
 
-## Initial setup checklist
+## Initial setup reference
 
-- Confirm private GitHub repository and deployment branch.
+- Confirm repository visibility against the course requirement and deployment branch.
 - Confirm GCP project ID, region, and billing/credit context.
 - Confirm Artifact Registry repository name and Cloud Run service name.
 - Confirm public access and cost/scaling settings.
@@ -165,26 +163,21 @@ Do not delete the service or its last healthy revision while grading is active.
 
 ## Live verification record
 
-Pending. At deployment time record:
-
-- commit SHA and workflow run;
-- image digest;
-- Cloud Run revision and final settings;
-- public HTTPS URL;
-- health, home, direct-route, missing-route, static asset, and contact results;
-- timestamp and any known limitation.
-
-Recommended non-sensitive evidence fields:
-
 | Field | Observed value |
 | --- | --- |
-| GCP project identifier | Pending student confirmation |
-| Service and region | Pending student confirmation |
-| Deployment branch | Pending student confirmation |
-| Commit SHA / workflow run | Pending |
-| Cloud Run revision / image digest | Pending |
-| CPU / memory / min-max instances / concurrency / timeout | Pending observed service settings |
-| Public HTTPS URL | Pending |
-| `/api/health`, home, direct navigation, 404, assets, and contact | Pending production verification |
+| Verified at | 2026-11-08 19:24 EST |
+| GCP project identifier | `mis58710-ajavaid` |
+| Service and region | `portfolio`, `us-central1` |
+| Deployment branch | `main` |
+| Commit / GitHub quality run | `4f83257495735ff06ca2cafba3334d101164ec72`; run `42539147070` passed |
+| Cloud Build | `6a23e5cb-baed-4c5a-a6e5-9c7596b9929d`; `SUCCESS` |
+| Cloud Run revision | `portfolio-00009-28h`; Ready; 100% traffic |
+| Image digest | `sha256:8856cf9651caad0c097f7597027fa7d7037316f3d83884e7a878c37808e4e389` |
+| Public HTTPS URL | `https://portfolio-1033708826767.us-central1.run.app/` |
+| Health and routes | `/api/health` returned 200/`{"status":"ok"}`; home returned 200; custom missing route returned 404 |
+| Public assets and layouts | Both project screenshots loaded at mobile, tablet, and desktop widths with no overflow or console errors |
+| Contact | Student confirmed successful provider-backed delivery after configuring deployment values; automated acceptance/failure and validation states pass |
+
+The final documentation release also passes the canonical public URL into the Docker build so Open Graph metadata is generated with the deployed HTTPS origin rather than the local-development fallback.
 
 Keep the public service running and unchanged until grading is complete.

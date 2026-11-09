@@ -53,6 +53,13 @@ If requirements conflict or a choice would materially affect cost, public exposu
 - Keep credentials out of source control. Provide `.env.example` with names and safe descriptions only.
 - Before any external write or billable cloud action, state the target and expected impact. Obtain the student's decision when account, billing, region, domain, identity, or public-data choices are unresolved.
 
+### Keep public documentation employer-ready
+
+- Treat the README and repository landing experience as public professional artifacts, not an internal task dashboard.
+- Keep temporary blockers, student-only reminders, and stale completion notes out of the README; place detailed evidence and historical checkpoints in the appropriate documentation file.
+- Present assignment-required plans, prompt history, rules evolution, testing, and rubric evidence with concise, factual labels and without exposing secrets or unnecessary personal data.
+- When a final audit supersedes an earlier pending checkpoint, preserve the historical record but make the current verified state unambiguous.
+
 ## Technical direction
 
 Use a current, maintained framework that produces a genuinely runnable web application suitable for Cloud Run. Prefer **Next.js with TypeScript** unless the repository already uses another assignment-approved framework or the student chooses differently. Do not deliver a plain HTML/CSS/JavaScript site.

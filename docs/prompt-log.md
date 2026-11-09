@@ -259,3 +259,25 @@ This log records the student's real requests or faithful concise summaries, the 
 
 **Release checkpoint:** Commits `401e59f` (`build: add commit-traceable Cloud Run pipeline`) and `eb895fd` (`docs: record stale deployment diagnosis`) were pushed on `codex/fix-cloud-build-pipeline`. GitHub pull request #5, “Restore commit-traceable Cloud Run deployment,” was opened against `main` for student review. The public deployment is intentionally not claimed as repaired until that PR is merged and the resulting Cloud Build run and Cloud Run revision are verified.
 
+## 2026-11-08 19:20 EST - Public documentation and final evidence audit
+
+**Build stage:** Final repository presentation and release verification
+
+**Student prompt (faithful summary):** Requested removal of internal status language from the public README, a professional repository-wide presentation, a final double-check against every Excellent rubric criterion, an updated rubric audit reflecting completed work, and a final review pull request.
+
+**Action/output:** Created a final evidence plan before edits, re-read the assignment instructions and all Excellent rubric descriptors, verified pull request #5 and its GitHub checks, inspected the live Cloud Build and Cloud Run release, retested the repository and public site, ran Lighthouse, rewrote the README as professional project documentation, converted the rubric audit into a current evidence matrix, recorded the observed deployment settings and release identifiers, and added a genuine public-documentation rule to `AGENTS.md` with a dated evolution entry. The audit also found that live Open Graph metadata still used the local fallback, so the Docker/Cloud Build pipeline now supplies the verified public HTTPS origin at build time.
+
+**Sources used:** The assignment instructions define the dynamic framework, private-repository, Cloud Run trigger, required repository artifacts, and submission constraints. The rubric PDF defines the seven in-scope Excellent descriptors. Repository code/tests, GitHub run metadata, Cloud Build metadata, Cloud Run revision/settings, the public HTTPS responses, live browser observations, and Lighthouse results establish current evidence.
+
+**Relevant files:** `README.md`, `AGENTS.md`, `Dockerfile`, `cloudbuild.yaml`, `docs/plans/10-final-public-documentation-and-evidence-plan.md`, `docs/rules-evolution.md`, `docs/rubric-audit.md`, `docs/testing.md`, `docs/deployment.md`, and `docs/prompt-log.md`
+
+**What worked:** The repaired `main` pipeline deployed the exact merge commit; the revision is Ready and healthy; the corrected project and Background layouts are live; all local quality gates and 16 browser checks pass; desktop Lighthouse scores are 100 across Performance, Accessibility, Best Practices, and SEO; the public site has no observed overflow, console errors, or broken project images at the required viewports.
+
+**What did not work:** The README still described completed work as pending and foregrounded the rubric audit like an internal task dashboard. Deployment/testing documentation still contained stale pending statements. Live Open Graph metadata resolved to `http://localhost:3000` because the public URL was not present during the container build. The repository is public even though the assignment instructions specify private visibility, and one mobile Lighthouse run scored 82 for Performance because of elevated total blocking time.
+
+**Why:** Development checkpoints were accurate when written but were never consolidated after the successful deployment. Next.js generated metadata at build time, while the canonical URL had only been treated as a runtime environment value. Repository visibility is an explicit student choice that should be recorded, not silently changed.
+
+**How the next prompt/action changed:** The README now serves employers and developers first; historical detail remains in dedicated evidence files. The final audit distinguishes verified implementation from the single visibility exception and student-owned reflection. Deployment metadata is now a versioned build input, and final verification emphasizes source-to-revision traceability rather than a generic “latest” label.
+
+**Student annotation needed:** Decide whether to change the GitHub repository from public to private before submission to match the assignment's explicit technical requirement. After merging the final PR, confirm the public page source reports the Cloud Run HTTPS origin in its Open Graph URL.
+
