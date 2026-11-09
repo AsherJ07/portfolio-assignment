@@ -80,18 +80,38 @@ The deployed service requires:
 
 Never commit values. Prefer Secret Manager for `RESEND_API_KEY`. The sender and destination may be ordinary service environment variables if the student approves, though the private destination should not be printed in public logs or documentation.
 
-## Recommended GitHub-triggered deployment design
+## Push-triggered deployment design
 
-The exact workflow remains pending the confirmed private repository, deployment branch, GCP project, region, and course constraints. The recommended design is:
+GitHub Actions continues to run repository quality checks for pushes and pull requests. Deployment is handled separately by the existing Google Cloud Build repository trigger: only a push to `main` invokes the root `cloudbuild.yaml`, builds the committed Dockerfile, publishes an immutable image, and deploys it to Cloud Run. Pull-request events therefore do not deploy.
 
-1. GitHub Actions runs the committed quality workflow on pushes and pull requests.
-2. Pushes to the confirmed deployment branch run quality gates before deployment.
-3. GitHub authenticates to Google Cloud through Workload Identity Federation, avoiding a long-lived service-account key.
-4. The workflow builds and pushes the image to Artifact Registry.
-5. The workflow deploys the immutable image reference to Cloud Run with deliberate settings.
-6. A post-deploy step calls `/api/health` and the public home page over HTTPS.
+The Cloud Build service account should be replaced or reduced to the narrowest roles that still allow Artifact Registry upload, Cloud Run deployment, and use of the runtime service account. No long-lived cloud credential belongs in GitHub or this repository.
 
-Pull requests must not deploy. The deploy job should use a protected GitHub environment when available and minimal permissions (`contents: read`, `id-token: write`).
+## Implemented Cloud Build pipeline
+
+The root `cloudbuild.yaml` is the repository-owned source of truth for the existing Cloud Build trigger. On a push to `main`, it:
+
+1. installs the locked dependencies and runs lint, strict TypeScript, tests, and the production build;
+2. builds the committed multi-stage `Dockerfile`;
+3. tags and pushes the image with Cloud Build's immutable `$COMMIT_SHA` value to the existing Artifact Registry image path;
+4. deploys that exact image to the existing `portfolio` service in `us-central1`.
+
+The deploy step intentionally supplies only the service, image, region, traceability labels, platform, and non-interactive flag. Existing runtime environment variables, secrets, resource limits, traffic behavior, and public access remain service configuration rather than values duplicated in source control. The `commit-sha` revision label provides an explicit source-to-revision audit trail even though deployment uses a prebuilt image.
+
+The trigger must remain configured as follows:
+
+- event: push to branch `main`;
+- repository: `AsherJ07/portfolio-assignment`;
+- configuration: Cloud Build configuration file from the repository;
+- path: `/cloudbuild.yaml`;
+- region: `us-central1`.
+
+After any pipeline change, confirm the new revision's `commit-sha` label and deployed image tag match the triggering Git commit. A successful build or a “latest” revision label alone is insufficient evidence.
+
+### 2026-11-08 stale-source incident
+
+At 19:12 EST, GitHub `main` was at `fd46458`, but the public Cloud Run revision receiving 100% of traffic reported source commit `f6bfa84`. The connected `main` trigger was configured to read `/cloudbuild.yaml`, which did not exist in that source revision. The public site consequently remained healthy while serving older code. This repository-owned configuration repairs that missing contract; successful production repair remains pending the post-merge trigger and public verification.
+
+The currently observed service allocation was 1 vCPU, 512 MiB memory, concurrency 80, and a 300-second timeout. These observed values should be deliberately reviewed against the recommendations above after the source repair; changing them is a separate cloud action, not part of this pull request.
 
 ## Required Google Cloud roles
 
@@ -121,7 +141,7 @@ Avoid project-wide Owner or Editor roles. Record exact final roles after success
 
 For a failed rollout, inspect in this order:
 
-1. GitHub Actions quality/build/deploy step logs;
+1. Cloud Build trigger and step logs for the expected Git commit;
 2. Artifact Registry image existence and immutable digest;
 3. Cloud Run revision readiness and container startup logs;
 4. `PORT`/binding behavior and `/api/health` response;

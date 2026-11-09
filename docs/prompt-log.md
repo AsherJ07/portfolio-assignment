@@ -235,3 +235,27 @@ This log records the student's real requests or faithful concise summaries, the 
 
 **Student annotation needed:** After the revised pull request deploys, confirm whether the Fashion image scale is readable and whether the Background section now feels continuous rather than boxed or cut off.
 
+## 2026-11-08 19:12 EST - Stale Cloud Run source diagnosis and pipeline repair
+
+**Build stage:** Live deployment diagnosis after merged layout changes remained absent
+
+**Student prompt (faithful summary):** Reported that the merged visual changes still did not appear after attempting and reversing the container configuration, and requested help restoring the current site.
+
+**Action/output:** Verified that GitHub `main` points to merge commit `fd46458` for pull request #4 while the healthy Cloud Run revision receiving 100% of traffic reports source commit `f6bfa84`, the older pull request #2 merge. Inspected the trigger read-only and found it configured for `main` but expecting repository file `/cloudbuild.yaml`; that file was absent. Created a dedicated plan and repository-owned Cloud Build configuration using the committed Dockerfile, immutable commit tagging, the existing Artifact Registry path, and deployment to the existing service.
+
+**Sources used:** The Git remote established the current `main` commit. The public HTTPS page established that the old captions/layout were still served. Cloud Run revision metadata established the stale source commit and active traffic. The Cloud Build trigger established the missing `/cloudbuild.yaml` contract. Official Google Cloud Build documentation supplied the build-push-deploy configuration pattern.
+
+**Relevant files:** `docs/plans/09-cloud-build-source-of-truth-plan.md`, `cloudbuild.yaml`, `docs/deployment.md`, and `docs/prompt-log.md`
+
+**What worked:** The Cloud Run service remained healthy and public, all traffic targeted one latest revision, the repository already contained the required Dockerfile, and the existing Artifact Registry/service identifiers could be reused without replacing the URL.
+
+**What did not work:** Merging pull requests did not update the public code because the active revision was rebuilt from an older commit. Reversing the trigger to a repository Cloud Build configuration could not work because the referenced file did not exist.
+
+**Why:** The build trigger and repository no longer shared a valid build contract. A healthy revision and successful build status only proved that an image ran—not that it represented the current `main` commit.
+
+**How the next prompt/action changed:** Deployment configuration will live in version control. Every push-triggered build will run quality gates, build the hand-tuned Dockerfile, push an image tagged with the triggering commit SHA, deploy that exact image, and label the revision with the same SHA. Final verification must compare the Cloud Run revision label and image tag with GitHub `main` and test the public site.
+
+**Student annotation needed:** After merging the deployment PR, confirm the Cloud Build run completed and the public site shows the corrected Fashion and Background layouts. Rotate the provider credential exposed by the Cloud Run environment-variable view and migrate it to Secret Manager; do not place the replacement value in chat or source control.
+
+**Release checkpoint:** Commits `401e59f` (`build: add commit-traceable Cloud Run pipeline`) and `eb895fd` (`docs: record stale deployment diagnosis`) were pushed on `codex/fix-cloud-build-pipeline`. GitHub pull request #5, “Restore commit-traceable Cloud Run deployment,” was opened against `main` for student review. The public deployment is intentionally not claimed as repaired until that PR is merged and the resulting Cloud Build run and Cloud Run revision are verified.
+
