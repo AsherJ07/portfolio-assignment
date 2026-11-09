@@ -2,6 +2,7 @@ substitutions:
   _REGION: us-central1
   _SERVICE: portfolio
   _AR_IMAGE: cloud-run-source-deploy/asherj07-portfolio-assignment/portfolio
+  _SITE_URL: https://portfolio-1033708826767.us-central1.run.app
 
 steps:
   - id: quality-gates
@@ -15,6 +16,8 @@ steps:
     name: gcr.io/cloud-builders/docker
     args:
       - build
+      - --build-arg
+      - NEXT_PUBLIC_SITE_URL=${_SITE_URL}
       - --tag
       - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_IMAGE}:$COMMIT_SHA
       - .
