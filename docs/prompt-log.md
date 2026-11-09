@@ -257,3 +257,5 @@ This log records the student's real requests or faithful concise summaries, the 
 
 **Student annotation needed:** After merging the deployment PR, confirm the Cloud Build run completed and the public site shows the corrected Fashion and Background layouts. Rotate the provider credential exposed by the Cloud Run environment-variable view and migrate it to Secret Manager; do not place the replacement value in chat or source control.
 
+**Release checkpoint:** Commits `401e59f` (`build: add commit-traceable Cloud Run pipeline`) and `eb895fd` (`docs: record stale deployment diagnosis`) were pushed on `codex/fix-cloud-build-pipeline`. GitHub pull request #5, “Restore commit-traceable Cloud Run deployment,” was opened against `main` for student review. The public deployment is intentionally not claimed as repaired until that PR is merged and the resulting Cloud Build run and Cloud Run revision are verified.
+
