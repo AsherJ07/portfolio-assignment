@@ -135,6 +135,23 @@ Docker CLI and Docker Desktop were not installed, so image build/run evidence re
 
 ## Known limitations and pending verification
 
+### Cloud Build source repair checkpoint - 2026-11-08
+
+The public service remained on source commit `f6bfa84` after GitHub `main` advanced to `fd46458`. Read-only trigger inspection showed that pushes to `main` expected `/cloudbuild.yaml`, but the repository did not contain that file.
+
+| Check | Observed result |
+| --- | --- |
+| `cloudbuild.yaml` YAML parse | Passed; four ordered steps were present |
+| `git diff --check` | Passed |
+| `npm run lint` | Passed with zero warnings |
+| `npm run typecheck` | Passed |
+| `npm test -- --run` | Passed: 5 files, 11 tests |
+| `npm run build` | Passed; expected application/API routes generated and standalone assets staged |
+
+The configuration runs quality gates, builds the committed multi-stage Dockerfile, pushes an image tagged with Cloud Build's triggering commit SHA, and deploys that exact image to the existing `portfolio` service in `us-central1`. It also records the commit SHA as a revision label. The deploy command deliberately omits environment-variable, secret, scaling, traffic, and access flags so it does not overwrite working service configuration.
+
+Still pending: merge the review pull request, observe the `main` trigger, confirm the resulting Cloud Run revision label and image tag match the merge commit, call `/api/health`, and verify the public page no longer contains the removed screenshot captions and shows the corrected project/Background layouts.
+
 - The student reports that deployed Resend delivery now succeeds after environment configuration; direct non-sensitive inbox/provider-log evidence has not yet been captured by the agent.
 - Email and LinkedIn details shown locally require student confirmation before public deployment.
 - The Creator project now has a verified repository and real screenshot. Fashion has a real workflow image but still needs any available repository/demo, confirmed constraints, and measured outcome; the other two projects retain intentionally labeled illustrations.
